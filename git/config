@@ -10,10 +10,11 @@
 	gpgsign = true
 [core]
 	# do not touch line endings on checkout or commit
-	# ... why is this bloated garbage even a part of git?
+	# (why is this confusing bloated garbage even a part of git?)
 	# instead use hook to stop accidental CRLF
 	autocrlf = false
-	# XDG hardcoded!
+	# WARNING: XDG_CONFIG_DIR hardcoded here!
+	# TODO
 	hooksPath = ~/etc/git/hooks # https://stackoverflow.com/a/37293198
 [gpg]
 	format = ssh

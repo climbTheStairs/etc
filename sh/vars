@@ -6,6 +6,8 @@
 
 ## pot useful
 readonly HT=$(printf \\t)
+readonly LF='
+'
 readonly CR=$(printf \\r)
 
 ## default prog
@@ -15,7 +17,9 @@ export EDITOR=vim
 ## prog-spec
 #_export GIT_EXTERNAL_DIFF=difft
 #__export DFT_SYNTAX_HIGHLIGHT=off
-export LESS='--RAW-CONTROL-CHARS --shift .1' # not work w leading 0
+LESS="$LESS --RAW-CONTROL-CHARS" # ANSI esc code, eg f clr
+LESS="$LESS --shift=.1" # horz scroll amt; `--shift` val cant hv leading 0
+export LESS
 export GOPATH=$HOME
 # not only keep ~ clean but also keep histfile safe
 # bc certain Bash session truncate ~/.bash_history on close
