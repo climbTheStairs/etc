@@ -1,0 +1,17 @@
+# better tab completion
+set show-all-if-unmodified on
+set completion-ignore-case on
+set colored-completion-prefix on
+
+# set -o vi
+set editing-mode vi
+
+# print ANSI esc code to change cursor when changing modes
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[5 q\2
+set vi-cmd-mode-string \1\e[1 q\2
+
+# enable C-l in insert mode too
+set keymap vi-insert
+Control-l: clear-screen
+

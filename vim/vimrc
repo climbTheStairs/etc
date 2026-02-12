@@ -1,0 +1,144 @@
+" do not modify this copy if it is not the one in arch:!
+" modify that file and copy it over!
+
+" basic
+nnoremap Y y$
+nnoremap cw dwi
+nnoremap cW dWi
+nnoremap U <C-r>
+
+" additional
+nnoremap // :nohlsearch<Enter>
+nnoremap J gt
+nnoremap K gT
+nnoremap <C-j> J
+vnoremap <C-j> J
+
+"" spell
+nnoremap <F6> :se spell!<Enter>
+" TODO: (non-trivial) prevent ColorColumn annoyingly overriding bg
+hi SpellBad	ctermbg=1 ctermfg=11 cterm=undercurl
+
+" very magic
+nnoremap / /\v
+nnoremap ? ?\v
+nnoremap S :%s/\v
+vnoremap S :s/\v
+nnoremap :s/ :s/\v
+nnoremap :g/ :g/\v
+nnoremap :v/ :v/\v
+
+" ctrl
+nnoremap <C-q> :q<Enter>
+nnoremap <C-s> :w<Enter>
+inoremap <C-z> <C-o>u
+inoremap <C-y> <C-o><C-r>
+inoremap <C-f> <C-o>/
+
+" cursors for each mode
+let &t_SI = "\e[5 q"
+let &t_SR = "\e[3 q"
+let &t_EI = "\e[1 q"
+
+" basic
+se backspace=indent,eol,start	" Allow backspacing autoindents, linebreaks, and past start of insert
+se joinspaces			" Insert two spaces when joining lines ending with ".", "!", or "?"
+se nowrap
+se tabstop=8			" Tabs are 8 col wide
+
+"" search
+se hlsearch			" hi res
+se ignorecase			" nec for 'smartcase'
+se incsearch			" show res while ty
+se smartcase			" ignorecase only if query is lowercase
+
+"" colorcolumn
+se colorcolumn=73,80		" Set vertical edges
+hi ColorColumn ctermbg=234
+
+" lo lv
+se fileformat=unix		" Use Unix line endings (LF)
+se fileformats=unix		" EOL formats to try, in order
+se history=10000		" :command hist; 10000 is max possible
+se shiftwidth=0			" Set indent size to tabstop value
+se tabpagemax=100		" max num of tabs openable w `-p`
+
+"" xdg base dir
+" TODO: XDG_DATA_HOME ^ XDG_STATE_HOME?
+let xdg_data = get(environ(), 'XDG_DATA_HOME', expand('~/sha')) . '/vim'
+if !isdirectory(xdg_data)
+	call mkdir(xdg_data, 'p')
+endif
+let &viminfofile = xdg_data . '/viminfo'
+
+" _additional
+se list				" Display invisible characters
+se listchars=tab:\|-,nbsp:%,trail:_
+se mouse=			" Disable mouse input
+se scrolloff=999		" Keep cursor in the center of the screen
+
+" qol
+se autoindent			" May cause problems with writing lists; *not* necessary to use "n" in `formatoptions` contrary to the documentation
+se display+=lastline		" Show partially hidden wrapped lines
+se laststatus=2			" Always show status bar
+se linebreak			" Don't break words when wrapping
+se ruler			" Show cursor position
+se shortmess-=S			" Show search count message when searching (e.g. [1/5])
+se showcmd			" Show partial commands
+se wildmenu			" Tab autocomplete menu
+
+"" ln num
+se number relativenumber	" ln num
+hi LineNr	ctermfg=238
+
+"" show curr pos
+"e cursorcolumn			" hi curr col
+se cursorline			" hi curr ln
+"i CursorColumn	ctermbg=234
+hi CursorLine	cterm=NONE ctermbg=234
+hi CursorLineNr	cterm=NONE ctermbg=234
+
+" prevent cursor moving left on InsertLeave
+" https://stackoverflow.com/q/2295410#comment11302803_22962
+au InsertLeave * :normal! `^
+
+" ~~pretty~~ less ugly clr
+syn on
+"i Conceal	ctermbg=238
+"i MatchParen	ctermbg=34
+"i Search	ctermbg=34
+
+" Settings for different filetypes
+au FileType c		setl ts=8
+au FileType css		setl ts=4
+au FileType go		setl ts=4
+au FileType html	setl ts=2
+au FileType javascript	setl ts=4
+au FileType json	setl ts=2
+au FileType markdown	setl ts=4
+au FileType python	setl ts=4 et
+au FileType sh		setl ts=4
+au FileType tex		setl ts=4 cole=2
+au FileType tsv		setl ts=50 nowrap
+au FileType yaml	setl ts=2
+let g:markdown_recommended_style = 0 " fuck off neovim <https://redd.it/yiofkx>
+
+" Settings for diff file names
+au BufRead,BufNewFile draw.tsv	setl ts=24
+au BufRead,BufNewFile deb.md,deb.*.md	nnoremap <Leader> /\v^## .*\|^\s*\+\|!!!<Enter>
+
+" macros
+let @d=':r !iso8601kgJ'
+let @r='8ldf.fr2df/4wcf/comment/f/xf#dE' " fmt @red comment url
+let @f='dEA	p03xA	j' " fmt @1t export
+let @s='f.a'
+
+" run files with F5
+" TODO: mk master compile, exec, open scr out o Vim
+au FileType c			nnoremap <F5> :!c89 -Wall -Wextra -pedantic -ggdb -Werror % && ./a.out<Enter>
+au FileType python		nnoremap <F5> :!python %<Enter>
+au BufRead,BufNewFile *.d2	nnoremap <F5> :!d2 --layout=elk %<Enter>
+
+ru arch.vim
+ru vivo.vim
+

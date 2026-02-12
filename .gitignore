@@ -1,0 +1,8 @@
+_*
+
+mitmproxy/*.cer
+mitmproxy/*.p12
+mitmproxy/*.pem
+
+htop/
+neofetch/

@@ -1,0 +1,67 @@
+#!/bin/sh
+# shellcheck disable=SC2034 # unused var
+[ -n "$XDG_CONFIG_HOME"	] &&
+[ -n "$XDG_DATA_HOME"	] &&
+[ -n "$XDG_CACHE_HOME"	] || exit 1
+
+## pot useful
+readonly HT=$(printf \\t)
+readonly CR=$(printf \\r)
+
+## default prog
+export BROWSER=qutebrowser
+export EDITOR=vim
+
+## prog-spec
+#_export GIT_EXTERNAL_DIFF=difft
+#__export DFT_SYNTAX_HIGHLIGHT=off
+export LESS='--RAW-CONTROL-CHARS --shift .1' # not work w leading 0
+export GOPATH=$HOME
+# not only keep ~ clean but also keep histfile safe
+# bc certain Bash session truncate ~/.bash_history on close
+# <https://stackoverflow.com/a/19533853>
+export HISTFILE=$XDG_DATA_HOME/bash/historia_aeterna
+# never truncate Bash hist
+export HISTFILESIZE=
+# eq to also setting HISTCONTROL=ignoreboth
+export HISTIGNORE='..:cd ..:cd:fg:pwd:clear:c:ca:c cd:g df:g st:l[als]:lla:lf:me:t:ta:tat:t a:t ls:v:exit:bash:&:[ ]*'
+export HISTSIZE=
+# `history` output
+export HISTTIMEFORMAT='[%Y-%m-%d %H:%M:%S] '
+
+## xdg base dir
+export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
+export NODE_REPL_HISTORY=$XDG_DATA_HOME/nodejs/repl_hist
+export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
+export RLWRAP_HOME=$XDG_DATA_HOME/rlwrap/
+export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite3/hist
+export TEXMFCONFIG=$XDG_CONFIG_HOME/texmf/
+export TEXMFHOME=$XDG_DATA_HOME/texmf/
+export TEXMFVAR=$XDG_CACHE_HOME/texmf/
+export WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
+
+# `\1` and `\2` prevent non-printing char affect cursor align
+# TODO: how this interact w `printf`?
+# TODO: mv up t "pot useful"
+readonly reset='\1\033[0m\2' bold='\1\033[1m\2' blink='\1\033[6m\2'
+readonly red='\1\033[31m\2' green='\1\033[32m\2' blueb='\1\033[94m\2'
+readonly cyanb='\1\033[96m\2'
+# shellcheck disable=SC2059 # var in printf fmt str
+prompt_stuff() {
+	# what happened?
+	code=$?
+	[ $code = 0 ] || printf "$red[%d] " $code
+	njob=$(jobs | wc -l)
+	[ "$njob" = 0 ] || printf "$blueb[bg=%d] " "$njob"
+	[ -z "$lf" ] || printf "$green[lf] "
+	# where am i?
+	printf "$cyanb"
+	case $PWD/ in
+		$HOME/*)	printf '~%s' "${PWD#"$HOME"}" ;;
+		*)			printf '%s' "$PWD" ;;
+	esac
+	# ac prompt
+	printf "$reset $bold$blink;$reset "
+}
+PS1='$(prompt_stuff)'
+

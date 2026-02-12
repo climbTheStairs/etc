@@ -1,0 +1,136 @@
+#!/bin/sh
+# shellcheck disable=SC2139
+readonly HT=$(printf \\t) 2> /dev/null
+
+## POSIX default opts
+alias cp='cp -i'
+alias df='df -k'
+alias du='du -k'
+alias ls='LC_ALL=C ls -k'
+alias mv='mv -i'
+
+## default opts
+alias c89='gcc -std=c89'
+alias c99='gcc -std=c99'
+alias dce='discord-chat-exporter-cli'
+alias dcec='dce export		--fuck-russia --utc --media --reuse-media -c'
+alias dceg='dce exportguild	--fuck-russia --utc --media --reuse-media -g'
+alias diff='diff --color'
+alias ed='rlwrap ed'
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+alias gcc='gcc -Wall -Wextra -Wpedantic -g'
+alias grep='grep --color'
+alias jq='jq --tab'
+alias ls='LC_ALL=C ls -k --color --group-directories-first'
+alias mitmproxy='mitmproxy --set confdir="${XDG_CONFIG_HOME:-$HOME/etc}/mitmproxy"'
+alias mitm='mitmproxy -p 3128'
+alias mkdir='mkdir -p'
+alias neofetch='neofetch --cpu_temp C'
+alias qmv='qmv -f do'
+alias quark='doas quark -lh 0.0.0.0'
+alias tabawk="awk -F '$HT'"
+alias vim='vim -p'
+
+## POSIX short commands
+alias '+x=chmod +x'
+alias '644=chmod 644'
+alias cv='command -v'
+alias la='ls -A'
+alias ll='ls -l'
+alias lla='ls -lA'
+alias mk='make'
+alias mkd='mkdir'
+alias mnt='mount'
+alias rmd='rmdir'
+alias umnt='umount'
+
+## short commands
+alias curlff='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"'
+alias g='git'
+alias gdl='gallery-dl'
+alias gdl.='gallery-dl -D .'
+alias py='python3'
+alias scim='sc-im'
+alias t='tmux'
+alias tts='piper-tts --model /usr/share/piper-voices/en/en_US/ryan/high/en_US-ryan-high.onnx'
+alias v='"${EDITOR:-vi}"'
+alias v='vim'
+alias ydl='yt-dlp'
+ta() { tmux attach-session ${1+-t $1}; }
+alias tat='ta || t'
+
+## flgs as cmd
+readonly opts_systemctl='enable disable start stop restart status'
+readonly opts_pacman_root='Rns S Syu Syyu'
+readonly opts_pacman_user='Qi Qs Qqs Ql Qql Si Ss Ssq'
+readonly opts_pacman_q='Q Qd Qdt Qe Qi Qm Qn Qo'
+for opt in $opts_systemctl;		do alias "$opt=doas systemctl $opt"	; done
+for opt in $opts_pacman_root;	do alias "$opt=doas pacman -$opt"	; done
+for opt in $opts_pacman_user;	do alias "$opt=pacman -$opt"		; done
+for opt in $opts_pacman_q;		do alias "$opt=pacman -q$opt"		; done
+Qlf()	{  Ql "$@" | grep -Ev '/$'; }
+Qqlf()	{ Qql "$@" | grep -Ev '/$'; }
+
+## cd
+# GNU Bash reads 'alias -=...' as opt
+alias -='cd - > /dev/null' 2> /dev/null || alias -- -='cd - > /dev/null'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias me='cd "$HOME/doc/me"'
+alias ca='cd "$HOME/src/calx-dl/tofmt"'
+
+## me
+# shellcheck disable=SC2086
+cmdme() { $1 "$HOME"/doc/me/$2*; }
+alias   vme='cmdme "${EDITOR:-vi}"'
+alias   pme='cmdme "vim -p"'
+alias   ome='cmdme "vim -O"'
+alias catme='cmdme cat'
+gme() ( me; grepr . "$@"; )
+alias sched='< "$HOME/doc/me/sched2.txt" tsv'
+
+## complex alias & fn
+
+# clear screen, mv cursor (1, 1), clear scrollback
+alias c='printf \\x1B[2J\\x1B[H\\x1B[3J;'
+alias p='printf %s\\n'
+# this override GNU coreutils /bin/sum
+alias sum='{ paste -sd + | bc; }'
+alias uniq-c="{ uniq -c | sed 's/^ *//; s/ /$HT/'; }"
+alias cnt='{ sort | uniq-c | sort -rn; }'
+alias fname='sed "s,.*/,,"'
+alias dname='sed "s,[^/]*\$,,"'
+alias ext='{ fname | sed "/[^.][.]/!s/.*//; s/.*[.]//"; }'
+# dep: column, less
+alias tsv="{ column -ts '$HT' | less --chop-long-lines; }"
+#_alias fig='git --git-dir="${XDG_DATA_HOME:-$HOME/sha}/fig" --work-tree="$HOME"'
+
+mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
+
+inplace() (
+	:
+)
+# src: https://unix.stackexchange.com/a/563732
+alias  nocr_vim='vim --clean -c "bufdo se ff=unix|wqa"'
+alias nobom_vim='vim --clean -c "bufdo se  nobomb|wqa"'
+
+voldetect() {
+	ffmpeg -i "$1" -af volumedetect -f null /dev/null 2>&1 | grep -F _volume:
+}
+
+grepr() {
+	dir=$1
+	shift
+	# `'grep'` quoted to prevent SC2033
+	find "$dir" -type f -exec 'grep' --color "$@" {} + # --color nonstandard
+}
+
+# dep: tput cols
+alias fit='cut -c "-$(tput cols)"'
+
+# usage: doas txtrec NUM DRIVE > OUTPUT
+# src: https://wiki.archlinux.org/title/file_recovery#Text_file_recovery
+# dep: grep --text --context
+alias txtrec='grep -F --text --context'
+

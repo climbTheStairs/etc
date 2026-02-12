@@ -1,0 +1,32 @@
+#!/bin/sh
+# dep: file (idk if this `file` behav is std)
+alias p='printf %s\\n'
+fatal() { >&2 p "$0: $1"; exit 1; }
+main() {
+	ck_newline
+	# fnames containing colons mess up parsing of `file` output
+	ck_colon
+	ck_crlf
+}
+ck_newline() {
+	flist=$(find . -name '*
+*')
+	[ -z "$flist" ] || fatal "these fnames contain newlines:
+$flist"
+}
+ck_colon() {
+	flist=$(find . -name '*:*')
+	[ -z "$flist" ] || fatal "these fnames contain colons:
+$flist"
+}
+ck_crlf() {
+	IFS='
+'
+	flist=$(git diff --cached --name-only --diff-filter=ACM)
+	[ -z "$flist" ] && return 0
+	# shellcheck disable=SC2086
+	flist=$(file $flist | awk -F : '/CRLF/ { print $1 }')
+	[ -z "$flist" ] || fatal "these files use CRLF:
+$flist"
+}
+main

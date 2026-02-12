@@ -1,0 +1,31 @@
+# do not modify this copy if it is not the one in arch:!
+# modify that file and copy it over!
+# last modified: 2025-08-29T06:47:20Z
+[alias]
+	c = commit -m
+	ca = commit -am
+	df = diff --minimal
+	dfs = diff --summary
+	log1 = log --oneline
+	st = status --short
+[commit]
+	gpgsign = true
+[core]
+	# do not touch line endings on checkout or commit
+	# ... why is this bloated garbage even a part of git?
+	# instead use hook to stop accidental CRLF
+	autocrlf = false
+	# XDG hardcoded!
+	hooksPath = ~/etc/git/hooks # https://stackoverflow.com/a/37293198
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = master
+[pull]
+	ff = only # https://blog.sffc.xyz/post/185195398930
+[user]
+	email = yxtqwf+github@gmail.com
+	name = climbTheStairs
+	signingkey = ~/.ssh/id_ed25519.pub
+[http]
+	#proxy = http://localhost:3128/

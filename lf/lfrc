@@ -1,0 +1,27 @@
+# do not modify this copy if it is not the one in arch:!
+# instead modify that file and copy it over!
+
+set autoquit
+set dirfirst
+set drawbox
+set hidden
+set incsearch
+set nomouse
+set noignorecase
+set previewer ~/etc/lf/previewer.sh # Cannot use environment variable here!
+set ratios 1:2
+set scrolloff 999
+
+map b :set drawbox!
+map <c-z> $kill -STOP $PPID
+map <delete> delete
+map <esc> :clear; unselect
+
+## windows only
+#set nodrawbox
+#map e $nvim %f%
+#map E &start nvim %f%
+#map C &start cmd
+#map W &explorer .
+#map <c-l> &echo | set /p=%f% | clip
+

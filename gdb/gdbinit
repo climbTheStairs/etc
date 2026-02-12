@@ -1,0 +1,5 @@
+set debuginfod enabled off
+# https://stackoverflow.com/a/17975687
+define hook-quit
+    set confirm off
+end
