@@ -1,5 +1,4 @@
-# do not modify this copy if it is not the one in arch:!
-# instead modify that file and copy it over!
+# Only ever modify master copy on arch:!
 
 set autoquit
 set dirfirst

@@ -1,6 +1,5 @@
 {
-	"_COMMENT1": "do not modify this copy if it is not the one in arch:!",
-	"_COMMENT2": "instead modify that file and copy it over!",
+	"_COMMENT": "Only ever modify master copy on arch:!",
 	"extractor": {
 		"filename": "{category[:3]}_{post_shortcode|tweet_id|id|index|post_id}_{num|'0':>02}.{extension}",
 		"pixiv": {

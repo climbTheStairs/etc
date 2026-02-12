@@ -1,4 +1,5 @@
 #!/bin/sh
+# Only ever modify master copy on arch:!
 # dep: file (idk if this `file` behav is std)
 alias p='printf %s\\n'
 fatal() { >&2 p "$0: $1"; exit 1; }

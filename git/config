@@ -1,6 +1,4 @@
-# do not modify this copy if it is not the one in arch:!
-# modify that file and copy it over!
-# last modified: 2025-08-29T06:47:20Z
+# Only ever modify master copy on arch:!
 [alias]
 	c = commit -m
 	ca = commit -am
