@@ -27,15 +27,20 @@ motd_reminder() {
 	echo
 }
 
+# TODO: parse `vim -r` ins
 motd_vim_swap() {
 	readonly swapdir=$XDG_CACHE_HOME/vim/swap
 	[ "$(p "$swapdir"/*)" != "$swapdir/*" ] || return
 	readonly pswp='
+readonly swapdir=$XDG_CACHE_HOME/vim/swap
 for f do
+	fname=${f#$swapdir/}
+	fname=$(printf %s\\n "$fname" | tr \% /)
+	fname=${fname#~/}
 	printf %s\\t%s\\n \
-		"$(file "$f" | sed -E "s/.*, pid ([0-9]+),.*/\\1/")" "$f"
+		"$(file "$f" | sed -E "s/.*, pid ([0-9]+).*/\\1/")" "$fname"
 done
-	'
+'
 	phead 'VIM SWAP DIR'
 	find "$swapdir" -type f -exec sh -c "$pswp" _ {} + | lolcat
 	echo

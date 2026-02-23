@@ -1,26 +1,44 @@
 # Only ever modify master copy on arch:!
 
-set autoquit
-set dirfirst
-set drawbox
+## basic (/etc/lf/lfrc)
+#set scrolloff 999
 set hidden
+set ifs "\n"
 set incsearch
-set nomouse
-set noignorecase
-set previewer ~/etc/lf/previewer.sh # Cannot use environment variable here!
+set mouse false
 set ratios 1:2
-set scrolloff 999
-
+map X :delete
 map b :set drawbox!
-map <c-z> $kill -STOP $PPID
-map <delete> delete
+map p :paste; clear
 map <esc> :clear; unselect
 
-## windows only
-#set nodrawbox
-#map e $nvim %f%
-#map E &start nvim %f%
-#map C &start cmd
-#map W &explorer .
-#map <c-l> &echo | set /p=%f% | clip
+## unix only
+set drawbox
+&lf -remote "send $id :set previewer $XDG_CONFIG_HOME/lf/previewer.sh"
+map q :lfcd_abort
+map Q :quit # lfcd: cd par sh into $PWD
+map x :rm_iff_empty
+#map <c-z> $kill -STOP $PPID # TODO: not working, fix
+cmd lfcd_abort &lf -remote "send $id :cd $OLDPWD; quit"
+cmd rm_iff_empty &{{
+	# TODO: show err on fail
+	[ -n "$fx" ] && find -- $fx \
+		-type d -prune	-exec rmdir	-- {} + -o \
+		-type f -size 0	-exec rm	-- {} +
+}}
+cmd _edit ${{
+	# TODO: see win lfrc
+	if [ -n "$TMUX" ]; then
+		tmux {split-window -h,new-window -a} -e EDITOR="$EDITOR" -e f="$f" \
+			'"$EDITOR" "$f"'
+	else
+		"$EDITOR" "$f"
+	fi
+}}
+
+## TODO: modularization
+# note: `source` is inst, but w `-remote` see brief flash wo `drawbox`
+#source ~/etc/lf/unix.lfrc
+#source ~/etc/lf/win.lfrc
+#&lf -remote "send $id :source $XDG_CONFIG_HOME/lf/unix.lfrc"
 

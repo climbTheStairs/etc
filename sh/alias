@@ -1,4 +1,5 @@
 #!/bin/sh
+# Only ever modify master copy on arch:!
 # shellcheck disable=SC2139
 readonly HT=$(printf \\t) 2> /dev/null
 
@@ -41,9 +42,7 @@ alias ll='ls -l'
 alias lla='ls -lA'
 alias mk='make'
 alias mkd='mkdir'
-alias mnt='mount'
 alias rmd='rmdir'
-alias umnt='umount'
 
 ## short commands
 alias curlff='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"'
@@ -89,6 +88,10 @@ alias   ome='cmdme "vim -O"'
 alias catme='cmdme cat'
 gme() ( me; grepr . "$@"; )
 alias sched='< "$HOME/doc/me/sched2.txt" tsv'
+# alr sourced from /etc/profile.d/lfcd.sh, but only on Arch Linux afaik
+# `command` prevents `alias lf=lfcd` from inf loop
+lfcd() { cd "$(command lf -print-last-dir "$@")"; }
+alias lf=lfcd
 
 ## complex alias & fn
 
@@ -109,7 +112,18 @@ alias tsv="{ column -ts '$HT' | less --chop-long-lines; }"
 mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 
 inplace() (
-	:
+	: #no_x() (
+	#	set -e
+	#	set -o noclobber
+	#	readonly tmp=_tmp_NAME_$$
+	#	for f do
+	#		cmd < "$f" > "$tmp"
+	#		cp -- "$tmp" "$f"
+	#		rm -f -- "$tmp"
+	#	done
+	#)
+	#cmd1='tail -c +4'
+	#cmd2='tr -d \\r'
 )
 # src: https://unix.stackexchange.com/a/563732
 alias  nocr_vim='vim --clean -c "bufdo se ff=unix|wqa"'
@@ -133,4 +147,8 @@ alias fit='cut -c "-$(tput cols)"'
 # src: https://wiki.archlinux.org/title/file_recovery#Text_file_recovery
 # dep: grep --text --context
 alias txtrec='grep -F --text --context'
+
+if [ "$0" = -bash ] || [ "$0" = bash ]; then
+	bind '"\C-o": "lf\C-m"'
+fi
 
