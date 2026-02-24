@@ -17,9 +17,8 @@ export EDITOR=vim
 ## prog-spec
 #_export GIT_EXTERNAL_DIFF=difft
 #__export DFT_SYNTAX_HIGHLIGHT=off
-LESS="$LESS --RAW-CONTROL-CHARS" # ANSI esc code, eg f clr
-LESS="$LESS --shift=.1" # horz scroll amt; `--shift` val cant hv leading 0
-export LESS
+# `--shift` val cant hv leading 0
+export LESS="--RAW-CONTROL-CHARS --shift=.1"
 export GOPATH=$HOME
 # not only keep ~ clean but also keep histfile safe
 # bc certain Bash session truncate ~/.bash_history on close
@@ -27,13 +26,15 @@ export GOPATH=$HOME
 export HISTFILE=$XDG_DATA_HOME/bash/historia_aeterna
 # never truncate Bash hist
 export HISTFILESIZE=
+# TODO: how excl from only disk but not mem?
 # eq to also setting HISTCONTROL=ignoreboth
-export HISTIGNORE='..:cd ..:cd:fg:pwd:clear:c:ca:c cd:g df:g st:l[als]:lla:lf:me:t:ta:tat:t a:t ls:v:exit:bash:&:[ ]*'
+export HISTIGNORE='&:[ ]*:pwd:cd:-:..:...:ca:me:fg:exit:l[als]:lla:v:c:'\
+'bash:clear:g st:lf:t:ta:tat:t ls:'
 export HISTSIZE=
 # `history` output
 export HISTTIMEFORMAT='[%Y-%m-%d %H:%M:%S] '
 
-## xdg base dir
+## XDG base dir
 export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/nodejs/repl_hist
 export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
@@ -47,9 +48,9 @@ export WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
 # `\1` and `\2` prevent non-printing char affect cursor align
 # TODO: how this interact w `printf`?
 # TODO: mv up t "pot useful"
-readonly reset='\1\033[0m\2' bold='\1\033[1m\2' blink='\1\033[6m\2'
-readonly red='\1\033[31m\2' green='\1\033[32m\2' blueb='\1\033[94m\2'
-readonly cyanb='\1\033[96m\2'
+readonly reset='\1\033[0m\2' bold='\1\033[1m\2' blink='\1\033[6m\2' \
+	red='\1\033[31m\2' green='\1\033[32m\2' blueb='\1\033[94m\2' \
+	cyanb='\1\033[96m\2'
 # shellcheck disable=SC2059 # var in printf fmt str
 prompt_stuff() {
 	# what happened?

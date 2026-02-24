@@ -87,7 +87,7 @@ se showcmd			" Show partial commands
 se wildmenu			" Tab autocomplete menu
 
 "" ln num
-se number relativenumber	" ln num
+se number			" ln num
 hi LineNr	ctermfg=238
 
 "" show curr pos

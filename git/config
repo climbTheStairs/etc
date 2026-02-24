@@ -1,11 +1,12 @@
 # Only ever modify master copy on arch:!
 [alias]
-	c = commit -m
-	ca = commit -am
-	df = diff --minimal
-	dfs = diff --summary
-	log1 = log --oneline
-	st = status --short
+	c	= commit -m
+	ca	= commit -am
+	df	= diff --minimal
+	dfs	= diff --summary
+	dfw	= diff --color-words
+	log1	= log --oneline
+	st	= status --short
 [commit]
 	gpgsign = true
 [core]

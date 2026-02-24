@@ -4,9 +4,11 @@
 #set scrolloff 999
 set hidden
 set ifs "\n"
+set ignorecase false # TODO: noic sort, smartcase srch
 set incsearch
 set mouse false
 set ratios 1:2
+set smartdia
 map X :delete
 map b :set drawbox!
 map p :paste; clear
