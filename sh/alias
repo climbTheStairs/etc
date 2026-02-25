@@ -13,7 +13,7 @@ alias mv='mv -i'
 ## default opts
 alias c89='gcc -std=c89'
 alias c99='gcc -std=c99'
-alias dce='discord-chat-exporter-cli'
+alias dce=discord-chat-exporter-cli
 alias dcec='dce export		--fuck-russia --utc --media --reuse-media -c'
 alias dceg='dce exportguild	--fuck-russia --utc --media --reuse-media -g'
 alias diff='diff --color'
@@ -40,23 +40,23 @@ alias cv='command -v'
 alias la='ls -A'
 alias ll='ls -l'
 alias lla='ls -lA'
-alias mk='make'
-alias mkd='mkdir'
-alias rmd='rmdir'
+alias mk=make
+alias mkd=mkdir
+alias rmd=rmdir
 
 ## short commands
 alias curlff='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"'
-alias g='git'
-alias gdl='gallery-dl'
+alias g=git
+alias gdl=gallery-dl
 alias gdl.='gallery-dl -D .'
-alias py='python3'
-alias scim='sc-im'
-alias shck='shellcheck'
-alias t='tmux'
+alias py=python3
+alias scim=sc-im
+alias shck=shellcheck
+alias t=tmux
 alias tts='piper-tts --model /usr/share/piper-voices/en/en_US/ryan/high/en_US-ryan-high.onnx'
 alias v='"${EDITOR:-vi}"'
-alias v='vim'
-alias ydl='yt-dlp'
+alias v=vim
+alias ydl=yt-dlp
 ta() { tmux attach-session ${1+-t $1}; }
 alias tat='ta || t'
 
