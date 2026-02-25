@@ -17,8 +17,9 @@ export EDITOR=vim
 ## prog-spec
 #_export GIT_EXTERNAL_DIFF=difft
 #__export DFT_SYNTAX_HIGHLIGHT=off
+# `--ignore-case` ~= Vim `smartcase`
 # `--shift` val cant hv leading 0
-export LESS="--RAW-CONTROL-CHARS --shift=.1"
+export LESS="--ignore-case --RAW-CONTROL-CHARS --shift=.1"
 export GOPATH=~
 # not only keep ~ clean but also keep histfile safe
 # bc certain Bash session truncate ~/.bash_history on close

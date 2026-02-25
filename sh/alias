@@ -80,7 +80,7 @@ alias ca='cd ~/src/calx-dl/tofmt'
 
 ## me
 # shellcheck disable=SC2086
-cmdme() { $1 ~/doc/me/$2*; }
+cmdme() { eval "$1" ~/doc/me/$2*; }
 alias   vme='cmdme "${EDITOR:-vi}"'
 alias   pme='cmdme "vim -p"'
 alias   ome='cmdme "vim -O"'
@@ -112,11 +112,9 @@ mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 
 diff_filt() {
 	# dep: bash `<()`
-	cmd=${cmd:-diff} bash -c '
-[ $# = 3 ] && eval "$cmd" \
-	<(cat -- "$1" | eval "$3") \
-	<(cat -- "$2" | eval "$3")
-' _ "$@"
+	[ $# = 3 ] && cmd=${cmd:-diff} bash -c \
+		'eval "$cmd" <(cat -- "$1" | eval "$3") <(cat -- "$2" | eval "$3")' \
+		_ "$@"
 }
 
 inplace() (
