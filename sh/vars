@@ -1,8 +1,8 @@
 #!/bin/sh
 # shellcheck disable=SC2034 # unused var
-[ -n "$XDG_CONFIG_HOME"	] &&
-[ -n "$XDG_DATA_HOME"	] &&
-[ -n "$XDG_CACHE_HOME"	] || exit 1
+[ -n "$XDG_CONFIG_HOME" ] &&
+[ -n "$XDG_DATA_HOME" ] &&
+[ -n "$XDG_CACHE_HOME" ] || exit 1
 
 ## pot useful
 readonly HT=$(printf \\t)
@@ -62,8 +62,8 @@ prompt_stuff() {
 	# where am i?
 	printf "$cyanb"
 	case $PWD/ in
-		$HOME/*)	printf '~%s' "${PWD#"$HOME"}" ;;
-		*)			printf '%s' "$PWD" ;;
+		$HOME/*)	printf %s "~${PWD#"$HOME"}" ;;
+		*)			printf %s "$PWD" ;;
 	esac
 	# ac prompt
 	printf "$reset $bold$blink;$reset "

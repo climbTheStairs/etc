@@ -5,11 +5,7 @@
 readonly LF='
 '
 alias p='printf %s\\n'
-
-fatal() {
-	>&2 p "$0: $1"
-	exit 1
-}
+fail() { >&2 p "$0: $1"; exit 1; }
 
 main() {
 	ck_newline
@@ -19,12 +15,12 @@ main() {
 
 ck_newline() {
 	files=$(find . -name "*$LF*")
-	[ -z "$files" ] || fatal "these fnames contain newlines:$LF$files"
+	[ -z "$files" ] || fail "these fnames contain newlines:$LF$files"
 }
 
 ck_colon() {
 	files=$(find . -name '*:*')
-	[ -z "$files" ] || fatal "these fnames contain colons:$LF$files"
+	[ -z "$files" ] || fail "these fnames contain colons:$LF$files"
 }
 
 ck_crlf() {
@@ -36,7 +32,7 @@ ck_crlf() {
 	# shellcheck disable=SC2086
 	files=$(file -- $files |
 		awk -F : '{ fname = $1; $1 = ""; if (/CRLF/) print fname; }')
-	[ -z "$files" ] || fatal "these files use CRLF:$LF$files"
+	[ -z "$files" ] || fail "these files use CRLF:$LF$files"
 }
 
 main

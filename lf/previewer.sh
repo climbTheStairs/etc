@@ -1,11 +1,8 @@
 #!/bin/sh
 # dep: bat, chafa, tar, unzip
-readonly BS=$(printf '\b')
-
-f=$1
-w=$(($2 - 5))
-h=$3
-case "$f" in
+readonly BS=$(printf \\b)
+f=$1 w=$(($2 - 5)) h=$3
+case $f in
 	*.tsv)							tsv.py < "$f" ;;
 	*.jpg|*.png|*.svg|*.webp)		chafa --size "${w}x${h}" "$f" ;;
 	*.mp[34]|*.m4[av]|*.mkv|*.webm)	mediainfo "$f" ;;
@@ -31,4 +28,3 @@ case "$f" in
 		fi
 		;;
 esac
-
