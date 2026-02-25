@@ -21,7 +21,7 @@ alias gcc='gcc -Wall -Wextra -Wpedantic -g'
 alias grep='grep --color'
 alias jq='jq --tab'
 alias ls='LC_ALL=C ls -k --color --group-directories-first'
-alias mitmproxy='mitmproxy --set confdir="${XDG_CONFIG_HOME:-$HOME/etc}/mitmproxy"'
+alias mitmproxy='mitmproxy --set confdir="${XDG_CONFIG_HOME:-~/etc}/mitmproxy"'
 alias neofetch='neofetch --cpu_temp C'
 alias qmv='qmv -f do'
 alias quark='doas quark -lh 0.0.0.0'
@@ -75,18 +75,18 @@ Qqlf()	{ Qql "$@" | grep -Ev '/$'; }
 alias -='cd - > /dev/null' 2> /dev/null || alias -- -='cd - > /dev/null'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias me='cd "$HOME/doc/me"'
-alias ca='cd "$HOME/src/calx-dl/tofmt"'
+alias me='cd ~/doc/me'
+alias ca='cd ~/src/calx-dl/tofmt'
 
 ## me
 # shellcheck disable=SC2086
-cmdme() { $1 "$HOME"/doc/me/$2*; }
+cmdme() { $1 ~/doc/me/$2*; }
 alias   vme='cmdme "${EDITOR:-vi}"'
 alias   pme='cmdme "vim -p"'
 alias   ome='cmdme "vim -O"'
 alias catme='cmdme cat'
 gme() ( me; grepr . "$@"; )
-alias sched='< "$HOME/doc/me/sched2.txt" tsv'
+alias sched='< ~/doc/me/sched2.txt tsv'
 # alr sourced from /etc/profile.d/lfcd.sh, but only on Arch Linux afaik
 # `command` prevents `alias lf=lfcd` from inf loop
 lfcd() { cd "$(command lf -print-last-dir "$@")"; }
@@ -106,7 +106,7 @@ alias dname='sed "s,[^/]*\$,,"'
 alias ext='{ fname | sed "/[^.][.]/!s/.*//; s/.*[.]//"; }'
 # dep: column, less
 alias tsv="{ column -ts '$HT' | less --chop-long-lines; }"
-#_alias fig='git --git-dir="${XDG_DATA_HOME:-$HOME/sha}/fig" --work-tree="$HOME"'
+#_alias fig='git --git-dir="${XDG_DATA_HOME:-~/sha}/fig" --work-tree="$HOME"'
 
 mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 

@@ -1,11 +1,11 @@
 #!/bin/sh
 set -o noclobber
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/bin/spec:$PATH # TODO: hopefully tmp, try think o sth better
-export XDG_CACHE_HOME=$HOME/cache
-export XDG_CONFIG_HOME=$HOME/etc
-export XDG_DATA_HOME=$HOME/sha
-export XDG_STATE_HOME=$HOME/state
+export PATH=~/bin:$PATH
+export PATH=~/bin/spec:$PATH # TODO: hopefully tmp, try think o sth better
+export XDG_CACHE_HOME=~/cache
+export XDG_CONFIG_HOME=~/etc
+export XDG_DATA_HOME=~/sha
+export XDG_STATE_HOME=~/state
 . "$XDG_CONFIG_HOME/sh/vars"
 . "$XDG_CONFIG_HOME/sh/alias"
 "$XDG_CONFIG_HOME/sh/motd"

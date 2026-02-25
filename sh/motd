@@ -12,7 +12,7 @@ phead() {
 #echo
 
 #phead 'SCHED'
-#cat "$HOME/doc/me/sched2.txt" | tail -n +2 | lolcat
+#cat ~/doc/me/sched2.txt | tail -n +2 | lolcat
 #echo
 
 #phead 'TODO'
