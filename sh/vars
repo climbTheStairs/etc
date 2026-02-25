@@ -11,7 +11,7 @@ readonly LF='
 readonly CR=$(printf \\r)
 
 ## default prog
-export BROWSER=qutebrowser
+#export BROWSER=qutebrowser
 export EDITOR=vim
 
 ## prog-spec
@@ -29,7 +29,7 @@ export HISTFILESIZE=
 # TODO: how excl from only disk but not mem?
 # eq to also setting HISTCONTROL=ignoreboth
 export HISTIGNORE='&:[ ]*:pwd:cd:-:..:...:ca:me:fg:exit:l[als]:lla:v:c:'\
-'bash:clear:g st:lf:t:ta:tat:t ls:'
+'bash:clear:g st:g remote -v:lf:t:ta:tat:t ls:'
 export HISTSIZE=
 # `history` output
 export HISTTIMEFORMAT='[%Y-%m-%d %H:%M:%S] '

@@ -112,6 +112,15 @@ alias tsv="{ column -ts '$HT' | less --chop-long-lines; }"
 
 mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 
+diff_filt() {
+	# dep: bash `<()`
+	cmd=${cmd:-diff} bash -c '
+[ $# = 3 ] && eval "$cmd" \
+	<(cat -- "$1" | eval "$3") \
+	<(cat -- "$2" | eval "$3")
+' _ "$@"
+}
+
 inplace() (
 	: #no_x() (
 	#	set -e
@@ -135,8 +144,7 @@ voldetect() {
 }
 
 grepr() {
-	dir=$1
-	shift
+	dir=$1; shift
 	# `'grep'` quoted to prevent SC2033
 	find "$dir" -type f -exec 'grep' --color "$@" {} + # --color nonstandard
 }
