@@ -2,8 +2,11 @@
 
 " basic
 nnoremap Y y$
-nnoremap cw dwi
-nnoremap cW dWi
+" better than simp `:nn cw dwi` &c bc can undo discretely
+let @c = 'dwi'
+let @k = 'dWi'
+nnoremap cw @c
+nnoremap cW @d
 nnoremap U <C-r>
 
 " additional
@@ -30,11 +33,12 @@ nnoremap :v/ :v/\v
 " ctrl
 nnoremap <C-q> :q<Enter>
 nnoremap <C-s> :w<Enter>
+inoremap <C-s> <C-o>:w<Enter>
 inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
 inoremap <C-f> <C-o>/
 
-" cursors for each mode
+" cursor for each mode
 let &t_SI = "\e[5 q"
 let &t_SR = "\e[3 q"
 let &t_EI = "\e[1 q"
@@ -140,4 +144,3 @@ au BufRead,BufNewFile *.d2	nnoremap <F5> :!d2 --layout=elk %<Enter>
 
 ru arch.vim
 ru vivo.vim
-
