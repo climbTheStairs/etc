@@ -6,6 +6,8 @@
 	dfs	= diff --summary
 	dfw	= diff --color-words
 	log1	= log --oneline
+	logs	= log1 --stat
+	logl	= log1 --name-only
 	st	= status --short
 [commit]
 	gpgsign = true

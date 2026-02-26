@@ -85,6 +85,7 @@ se autoindent			" May cause problems with writing lists; *not* necessary to use 
 se display+=lastline		" Show partially hidden wrapped lines
 se laststatus=2			" Always show status bar
 se linebreak			" Don't break words when wrapping
+se report=1
 se ruler			" Show cursor position
 se shortmess-=S			" Show search count message when searching (e.g. [1/5])
 se showcmd			" Show partial commands

@@ -20,6 +20,7 @@ set drawbox
 map q :lfcd_abort
 map Q :quit # lfcd: cd par sh into $PWD
 map x :rm_iff_empty
+map R $qmv -f do
 #map <c-z> $kill -STOP $PPID # TODO: not working, fix
 cmd lfcd_abort &lf -remote "send $id :cd $OLDPWD; quit"
 cmd rm_iff_empty &{{

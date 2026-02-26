@@ -1,4 +1,5 @@
 #!/bin/sh
+#echo "run from ${BASH_SOURCE[0]}"
 set -o noclobber
 export PATH=~/bin:$PATH
 export PATH=~/bin/spec:$PATH # TODO: hopefully tmp, try think o sth better
