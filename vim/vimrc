@@ -1,42 +1,42 @@
 " Only ever modify master copy on arch:!
 
 " basic
-nnoremap Y y$
+nn Y y$
 " better than simp `:nn cw dwi` &c bc can undo discretely
 let @c = 'dwi'
 let @k = 'dWi'
-nnoremap cw @c
-nnoremap cW @d
-nnoremap U <C-r>
+nn cw @c
+nn cW @d
+nn U <C-r>
 
 " additional
-nnoremap // :nohlsearch<Enter>
-nnoremap J gt
-nnoremap K gT
-nnoremap <C-j> J
-vnoremap <C-j> J
+nn // :nohlsearch<Enter>
+nn J gt
+nn K gT
+nn <C-j> J
+vn <C-j> J
 
 "" spell
-nnoremap <F6> :se spell!<Enter>
+nn <F6> :se spell!<Enter>
 " TODO: (non-trivial) prevent ColorColumn annoyingly overriding bg
 hi SpellBad	ctermbg=1 ctermfg=11 cterm=undercurl
 
 " very magic
-nnoremap / /\v
-nnoremap ? ?\v
-nnoremap S :%s/\v
-vnoremap S :s/\v
-nnoremap :s/ :s/\v
-nnoremap :g/ :g/\v
-nnoremap :v/ :v/\v
+nn / /\v
+nn ? ?\v
+nn S :%s/\v
+vn S :s/\v
+nn :s/ :s/\v
+nn :g/ :g/\v
+nn :v/ :v/\v
 
 " ctrl
-nnoremap <C-q> :q<Enter>
-nnoremap <C-s> :w<Enter>
-inoremap <C-s> <C-o>:w<Enter>
-inoremap <C-z> <C-o>u
-inoremap <C-y> <C-o><C-r>
-inoremap <C-f> <C-o>/
+nn <C-q> :q<Enter>
+nn <C-s> :w<Enter>
+ino <C-s> <C-o>:w<Enter>
+ino <C-z> <C-o>u
+ino <C-y> <C-o><C-r>
+ino <C-f> <C-o>/
 
 " cursor for each mode
 let &t_SI = "\e[5 q"
@@ -128,7 +128,7 @@ let g:markdown_recommended_style = 0 " fuck off neovim <https://redd.it/yiofkx>
 
 " Settings for diff file names
 au BufRead,BufNewFile draw.tsv	setl ts=24
-au BufRead,BufNewFile deb.md,deb.*.md	nnoremap <Leader> /\v^## .*\|^\s*\+\|!!!<Enter>
+au BufRead,BufNewFile deb.md,deb.*.md	nn <Leader> /\v^## .*\|^\s*\+\|!!!<Enter>
 
 " macros
 let @d=':r !iso8601kgJ'
@@ -138,9 +138,9 @@ let @s='f.a'
 
 " run files with F5
 " TODO: mk master compile, exec, open scr out o Vim
-au FileType c			nnoremap <F5> :!c89 -Wall -Wextra -pedantic -ggdb -Werror % && ./a.out<Enter>
-au FileType python		nnoremap <F5> :!python %<Enter>
-au BufRead,BufNewFile *.d2	nnoremap <F5> :!d2 --layout=elk %<Enter>
+au FileType c			nn <F5> :!c89 -Wall -Wextra -pedantic -ggdb -Werror % && ./a.out<Enter>
+au FileType python		nn <F5> :!python %<Enter>
+au BufRead,BufNewFile *.d2	nn <F5> :!d2 --layout=elk %<Enter>
 
 ru arch.vim
 ru vivo.vim
