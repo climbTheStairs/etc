@@ -10,7 +10,8 @@ set mouse false
 set ratios 1:2
 set smartdia
 map X :delete
-map b :set drawbox!
+map zb :set drawbox!
+map zd :set dirfirst!
 map p :paste; clear
 map <esc> :clear; unselect
 

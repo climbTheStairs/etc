@@ -142,7 +142,8 @@ voldetect() {
 grepr() {
 	dir=$1; shift
 	# `'grep'` quoted to prevent SC2033
-	find "$dir" -type f -exec 'grep' --color "$@" {} + # --color nonstandard
+	find "$dir" -type d -name .git \! -prune -o \
+		-type f -exec 'grep' --color "$@" {} + # --color nonstandard
 }
 
 # dep: tput cols
@@ -153,7 +154,8 @@ alias fit='cut -c "-$(tput cols)"'
 # dep: grep --text --context
 alias txtrec='grep -F --text --context'
 
-if [ "$0" = -bash ] || [ "$0" = bash ]; then
+if [ "${0#-}" = bash ]; then
 	bind '"\C-o": "lf\C-m"'
+	bind '"\C-t": "tat\C-m"'
 fi
 

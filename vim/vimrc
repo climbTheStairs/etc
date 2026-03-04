@@ -3,10 +3,11 @@
 " basic
 nn Y y$
 " better than simp `:nn cw dwi` &c bc can undo discretely
+" TODO: still doesn't fix `.`
 let @c = 'dwi'
 let @k = 'dWi'
 nn cw @c
-nn cW @d
+nn cW @k
 nn U <C-r>
 
 " additional
