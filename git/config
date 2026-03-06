@@ -16,7 +16,7 @@
 	# (why is this confusing bloated garbage even a part of git?)
 	# instead use hook to stop accidental CRLF
 	autocrlf = false
-	# WARNING: XDG_CONFIG_DIR hardcoded here!
+	# WARN: XDG_CONFIG_DIR hardcoded here!
 	# TODO
 	hooksPath = ~/etc/git/hooks # https://stackoverflow.com/a/37293198
 [gpg]
