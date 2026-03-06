@@ -19,12 +19,11 @@ case $f in
 	*.c|*.cpp|*.css|*.go|*.h|*.java|*.js|*.lua|*.html|*.py|*.sh|[Mm]akefile) # TODO: `*Makefile`?
 									highlight -O ansi "$f" ;;
 	*)
-		if [ "$(head -n 1 "$f" | cut -c 1-2)" = '#!' ]; then
+		if [ -n "$(sed -En '1{/^#!\//p;q}' -- "$f")" ]; then
 			highlight -O ansi "$f"
 		else
 			bat --force-colorization --wrap never --terminal-width "$w" "$f"
 			# https://github.com/gokcehan/lf/issues/534#issuecomment-2039527648
 			# fold -sw $(($2 - 2)) "$1"
-		fi
-		;;
+		fi ;;
 esac

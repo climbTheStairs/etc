@@ -95,7 +95,7 @@ alias lf=lfcd
 ## complex alias & fn
 
 # clear screen, mv cursor (1, 1), clear scrollback
-alias c='printf \\x1B[2J\\x1B[H\\x1B[3J;'
+alias c='printf \\x1B[2J\\x1B[H\\x1B[3J'
 alias p='printf %s\\n'
 # this override GNU coreutils /bin/sum
 alias sum='{ paste -sd + | bc; }'

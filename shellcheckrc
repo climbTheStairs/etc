@@ -1,4 +1,4 @@
-disable=SC1087 # TODO: file issue to disableb when `#!/bin/sh`
+disable=SC1087 # TODO: file issue to disable when `#!/bin/sh`
 disable=SC2015 # "A && B || C is not if-then-else"
 disable=SC2016 # im not retarded
 disable=SC2046,2086 # https://github.com/koalaman/shellcheck/issues/2816

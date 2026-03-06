@@ -9,6 +9,7 @@ set incsearch
 set mouse false
 set ratios 1:2
 set smartdia
+set sortby name
 map X :delete
 map zb :set drawbox!
 map zd :set dirfirst!
