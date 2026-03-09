@@ -1,10 +1,10 @@
 #!/bin/sh
 # dep: lolcat, tsv.py
-readonly bold=$(printf '\033[1m')
-readonly  end=$(printf '\033[0m')
+readonly BOLD=$(printf '\033[1m')
+readonly  END=$(printf '\033[0m')
 alias p='printf %s\\n'
 phead() {
-	printf "%s## %s%s\n" "$bold" "$1" "$end"
+	printf "%s## %s%s\n" "$BOLD" "$1" "$END"
 }
 
 #phead 'IMPORTANT NOTICES'

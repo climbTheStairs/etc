@@ -52,25 +52,25 @@ export WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
 # `\1` and `\2` prevent non-printing char affect cursor align
 # TODO: how this interact w `printf`?
 # TODO: mv up t "pot useful"
-readonly reset='\1\033[0m\2' bold='\1\033[1m\2' blink='\1\033[6m\2' \
-	red='\1\033[31m\2' green='\1\033[32m\2' blueb='\1\033[94m\2' \
-	cyanb='\1\033[96m\2'
+readonly RESET='\1\033[0m\2' BOLD='\1\033[1m\2' BLINK='\1\033[6m\2' \
+	RED='\1\033[31m\2' GREEN='\1\033[32m\2' BLUEB='\1\033[94m\2' \
+	CYANB='\1\033[96m\2'
 # shellcheck disable=SC2059 # var in printf fmt str
 prompt_stuff() {
 	# what happened?
 	code=$?
-	[ $code = 0 ] || printf "$red[%d] " $code
+	[ $code = 0 ] || printf "$RED[%d] " $code
 	njob=$(jobs | wc -l)
-	[ "$njob" = 0 ] || printf "$blueb[bg=%d] " "$njob"
-	[ -z "$lf" ] || printf "$green[lf] "
+	[ "$njob" = 0 ] || printf "$BLUEB[bg=%d] " "$njob"
+	[ -z "$lf" ] || printf "$GREEN[lf] "
 	# where am i?
-	printf "$cyanb"
+	printf "$CYANB"
 	case $PWD/ in
 		~/*)	printf %s "~${PWD#~}" ;;
 		*)		printf %s "$PWD" ;;
 	esac
 	# ac prompt
-	printf "$reset $bold$blink;$reset "
+	printf "$RESET $BOLD$BLINK;$RESET "
 }
 PS1='$(prompt_stuff)'
 
