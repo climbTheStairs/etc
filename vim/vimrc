@@ -146,3 +146,4 @@ au BufRead,BufNewFile *.d2	nn <F5> :!d2 --layout=elk %<Enter>
 
 ru arch.vim
 ru vivo.vim
+ru _my_fold.vim
