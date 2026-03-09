@@ -20,7 +20,7 @@ phead() {
 #echo
 
 motd_reminder() {
-	phead 'rwl; ___ pyr (neldore0); SLEEP !!!!!!!!!!!!!!'
+	phead 'RWL'
 	sed -n '/^## ls rwl$/,${/^- /p}' ~stairs/doc/me/rwl.md |
 		tr -d ' -~' | paste -d '\0' - - - | paste -d ',' - - | sed 's/,/，/' |
 		head -n 3 | lolcat
@@ -58,7 +58,7 @@ main() {
 	motd_reminder
 	motd_vim_swap
 	motd_bday
-	p '# ; das Gesetz, der Pyrit, der Schlaf'
+	p '# ; das Gesetz, der Pyrit (neldore0), der Schlaf !!!!!!!!!!!!!!'
 }
 
 main

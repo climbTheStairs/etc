@@ -11,3 +11,4 @@ export XDG_STATE_HOME=~/state
 . "$XDG_CONFIG_HOME/sh/alias"
 [ -x "$XDG_CONFIG_HOME/sh/motd" ] && "$XDG_CONFIG_HOME/sh/motd"
 [ -x "$XDG_CONFIG_HOME/sh/jtong7" ] && "$XDG_CONFIG_HOME/sh/jtong7"
+true
