@@ -11,8 +11,10 @@ readonly LF='
 readonly CR=$(printf \\r)
 
 ## default prog
+export BROWSER=firefox
 #export BROWSER=qutebrowser
 export EDITOR=vim
+export PAGER=less
 
 ## prog-spec
 #_export GIT_EXTERNAL_DIFF=difft
@@ -38,6 +40,7 @@ export HISTTIMEFORMAT='[%Y-%m-%d %H:%M:%S] '
 ## XDG base dir
 export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
 export NODE_REPL_HISTORY=$XDG_DATA_HOME/nodejs/repl_hist
+export PYTHONDONTWRITEBYTECODE=1
 export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
 export RLWRAP_HOME=$XDG_DATA_HOME/rlwrap/
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite3/hist
