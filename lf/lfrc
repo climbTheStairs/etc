@@ -2,6 +2,7 @@
 
 ## basic (/etc/lf/lfrc)
 #set scrolloff 999
+set dircounts
 set hidden
 set ifs "\n"
 set ignorecase false # TODO: noic sort, smartcase srch

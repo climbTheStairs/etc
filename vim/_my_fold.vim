@@ -34,7 +34,7 @@ endf
 fu! MyFold()
 	setl fdm=expr fde=FE(v:lnum)
 	setl fdc=1 fdt=FoldText() fcs+=fold:\ " rm trailing hyphens
-	hi Folded	ctermbg=NONE ctermfg=177
-	hi FoldColumn	ctermbg=NONE ctermfg=13
 endf
 au FileType markdown call MyFold()
+hi Folded	ctermbg=NONE ctermfg=177
+hi FoldColumn	ctermbg=NONE ctermfg=13
