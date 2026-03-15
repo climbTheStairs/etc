@@ -16,7 +16,7 @@ fu! FoldIndentInclPar(lnum)
 	if lvnext > lvcurr
 		return '>' . lvnext
 	elseif lvnext < lvcurr
-		return '<' . lvcurr
+		return '<' . (lvnext+1)
 	endif
 	return '='
 endf
