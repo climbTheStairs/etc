@@ -21,10 +21,13 @@ fu! FoldIndentInclPar(lnum)
 	return '='
 endf
 
+fu! ET(s)
+	return substitute(a:s, '\t', repeat(' ', &tabstop), 'g')
+endf
+
 fu! FoldText()
 	let ln = getline(v:foldstart)
-	let marker = matchstr(ln, '^\s*- ')
-	let marker = substitute(marker, '\t', repeat(' ', &tabstop), 'g')
+	let marker = ET(matchstr(ln, '^\s*- '))
 	let content = substitute(ln, '^\s*- ', '', '')
 	let n = v:foldend - v:foldstart
 	let ln = marker . content
