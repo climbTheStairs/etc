@@ -60,7 +60,7 @@ ta() { tmux attach-session ${1+-t $1}; }
 alias tat='ta || t'
 
 ## flgs as cmd
-readonly opts_systemctl='enable disable start stop restart status'
+readonly opts_systemctl='enable disable start stop restart status daemon-reload'
 readonly opts_pacman_root='Rns S Syu Syyu'
 readonly opts_pacman_user='Qi Qs Qqs Ql Qql Si Ss Ssq'
 readonly opts_pacman_q='Q Qd Qdt Qe Qi Qm Qn Qo'
@@ -113,7 +113,8 @@ mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 
 diff_filt() {
 	# dep: bash `<()`
-	[ $# = 3 ] && cmd=${cmd:-diff} bash -c \
+	# --color is non-std
+	[ $# = 3 ] && cmd=${cmd:-diff --color} bash -c \
 		'eval "$cmd" <(cat -- "$1" | eval "$3") <(cat -- "$2" | eval "$3")' \
 		_ "$@"
 }
@@ -144,7 +145,7 @@ grepr() {
 	dir=$1; shift
 	# `'grep'` quoted to prevent SC2033
 	find "$dir" -type d -name .git \! -prune -o \
-		-type f -exec 'grep' --color "$@" {} + # --color nonstandard
+		-type f -exec 'grep' --color "$@" {} + # --color is non-std
 }
 
 # dep: tput cols
