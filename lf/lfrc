@@ -19,11 +19,14 @@ map <esc> :clear; unselect
 
 ## unix only
 set drawbox
+set previewer ~/etc/lf/previewer.sh
 &lf -remote "send $id :set previewer $XDG_CONFIG_HOME/lf/previewer.sh"
 map q :lfcd_abort
 map Q :quit # lfcd: cd par sh into $PWD
 map x :rm_iff_empty
 map R $qmv -f do
+map <a-6> $chmod 644 "$f"
+map <a-x> $chmod +x "$f"
 #map <c-z> $kill -STOP $PPID # TODO: not working, fix
 cmd lfcd_abort &lf -remote "send $id :cd $OLDPWD; quit"
 cmd rm_iff_empty &{{

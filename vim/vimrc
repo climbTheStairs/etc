@@ -144,6 +144,9 @@ au FileType c			nn <F5> :!c89 -Wall -Wextra -pedantic -ggdb -Werror % && ./a.out
 au FileType python		nn <F5> :!python %<Enter>
 au BufRead,BufNewFile *.d2	nn <F5> :!d2 --layout=elk %<Enter>
 
+" cmd
+com -range Sum <line1>,<line2>w !sh -c ". ~/etc/sh/alias; sum"
+
 ru arch.vim
 ru vivo.vim
 ru _my_fold.vim

@@ -31,7 +31,7 @@ fu! FoldText()
 	let content = substitute(ln, '^\s*- ', '', '')
 	let n = v:foldend - v:foldstart
 	let ln = marker . content
-	return ln . repeat(' ', max([80 - strlen(ln . n), 1])) . n
+	return ln . repeat(' ', max([80 - strlen(ln . n), 2])) . n
 endf
 
 fu! MyFold()

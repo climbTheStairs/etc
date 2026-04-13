@@ -99,7 +99,9 @@ alias lf=lfcd
 alias c='printf \\x1B[2J\\x1B[H\\x1B[3J'
 alias p='printf %s\\n'
 # this override GNU coreutils /bin/sum
-alias sum='{ paste -sd + | bc; }'
+# this is fn so that `sh -c '. ~/etc/sh/alias; cmd...'` works
+sum() { sed 's/^/(/; s/$/)/' | paste -sd + | bc; }
+# abandoned: alias sum="awk '{t += \$n} END {print t}'"
 alias uniq-c="{ uniq -c | sed 's/^ *//; s/ /$HT/'; }"
 alias cnt='{ sort | uniq-c | sort -rn; }'
 alias fname='sed "s,.*/,,"'
