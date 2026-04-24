@@ -25,8 +25,8 @@ map q :lfcd_abort
 map Q :quit # lfcd: cd par sh into $PWD
 map x :rm_iff_empty
 map R $qmv -f do
-map <a-6> $chmod 644 "$f"
-map <a-x> $chmod +x "$f"
+map <a-6> :${{ chmod 644 -- $fx }}; reload
+map <a-x> :${{ chmod +x  -- $fx }}; reload
 #map <c-z> $kill -STOP $PPID # TODO: not working, fix
 cmd lfcd_abort &lf -remote "send $id :cd $OLDPWD; quit"
 cmd rm_iff_empty &{{
