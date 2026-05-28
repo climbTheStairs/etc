@@ -4,10 +4,11 @@
 	ca	= commit -am
 	df	= diff --minimal
 	dfs	= diff --summary
-	dfw	= diff --color-words
-	log1	= log --oneline
-	logs	= log1 --stat
-	logl	= log1 --name-only
+	dfw	= diff --word-diff=color
+	dfww	= diff --word-diff=plain
+	log1	= log --oneline		# show commit msg
+	log2	= log1 --name-only	# show commit msg, files
+	log3	= log1 --stat		# show commit msg, files, summary o changes
 	st	= status --short
 [commit]
 	gpgsign = true

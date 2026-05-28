@@ -32,11 +32,13 @@ alias vim='vim -p'
 alias '+x=chmod +x'
 alias '644=chmod 644'
 alias cv='command -v'
+alias date_http='date -u "+%a, %d %b %Y %H:%M:%S GMT"'
 alias la='ls -A'
 alias ll='ls -l'
 alias lla='ls -lA'
 alias mk=make
 alias mkd=mkdir
+alias pandocc='pandoc -V geometry:margin=1in -V linkcolor=blue'
 alias rmd=rmdir
 alias tabawk="awk -F '$HT'"
 
@@ -62,8 +64,8 @@ alias tat='ta || t'
 ## flgs as cmd
 readonly opts_systemctl='enable disable start stop restart status daemon-reload'
 readonly opts_pacman_root='Rns S Syu Syyu'
-readonly opts_pacman_user='Qi Qs Qqs Ql Qql Si Ss Ssq'
-readonly opts_pacman_q='Q Qd Qdt Qe Qi Qm Qn Qo'
+readonly opts_pacman_user='Qi Qs Qqs Ql Qql Si Ss Ssq Sg Sgq'
+readonly opts_pacman_q='Q Qd Qdn Qdm Qdtn Qe Qen Qem Qm Qn Qi Qo'
 for opt in $opts_systemctl;		do alias "$opt=doas systemctl $opt"	; done
 for opt in $opts_pacman_root;	do alias "$opt=doas pacman -$opt"	; done
 for opt in $opts_pacman_user;	do alias "$opt=pacman -$opt"		; done
@@ -158,7 +160,7 @@ alias fit='cut -c "-$(tput cols)"'
 # dep: grep --text --context
 alias txtrec='grep -F --text --context'
 
-if [ "${0#-}" = bash ]; then
+if [ "${0#-}" = bash ] || [ "${0%/bin/bash}" != "$0" ]; then
 	bind '"\C-o": "lf\C-m"'
 	bind '"\C-t": "tat\C-m"'
 fi
