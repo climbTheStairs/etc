@@ -1,0 +1,12 @@
+[Keyboard]
+NumLock=0
+
+[Libinput][1267][12548][ELAN1300:00 04F3:3104 Touchpad]
+DisableWhileTyping=true
+Enabled=true
+NaturalScroll=true
+ScrollFactor=0.75
+TapDragLock=true
+
+[Libinput][6127][24919][Lenovo Howard 2022 2.4G Mouse]
+NaturalScroll=false
