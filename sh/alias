@@ -29,13 +29,12 @@ alias quark='doas quark -lh 0.0.0.0'
 alias vim='vim -p'
 
 ## POSIX short commands
-alias '+x=chmod +x'
 alias '644=chmod 644'
 alias cv='command -v'
 alias date_http='date -u "+%a, %d %b %Y %H:%M:%S GMT"'
 alias la='ls -A'
 alias ll='ls -l'
-alias lla='ls -lA'
+alias lla='ll -A'
 alias mk=make
 alias mkd=mkdir
 alias pandocc='pandoc -V geometry:margin=1in -V linkcolor=blue'
@@ -43,13 +42,17 @@ alias rmd=rmdir
 alias tabawk="awk -F '$HT'"
 
 ## short commands
+alias '+x=chmod +x'				# non-std, see "3.10 Alias Name"
 alias curlff='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"'
 alias dce=discord-chat-exporter-cli
 alias dcec='dce export		--fuck-russia --utc --media --reuse-media -c'
 alias dceg='dce exportguild	--fuck-russia --utc --media --reuse-media -g'
 alias g=git
 alias gdl=gallery-dl
-alias gdl.='gallery-dl -D .'
+alias gdl.='gallery-dl -D .'	# non-std, see "3.10 Alias Name"
+alias ll='ls -lh'
+alias po='pass otp'
+alias pfreeze='pip list --not-required --format=freeze'
 alias py=python3
 alias scim=sc-im
 alias shck=shellcheck
@@ -75,11 +78,11 @@ Qqlf()	{ Qql "$@" | grep -Ev '/$'; }
 
 ## cd
 # GNU Bash reads 'alias -=...' as opt
-alias -='cd - > /dev/null' 2> /dev/null || alias -- -='cd - > /dev/null'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias me='cd ~/doc/me'
-alias ca='cd ~/src/calx-dl/tofmt'
+alias   -='cd - > /dev/null' 2> /dev/null || alias -- -='cd - > /dev/null'
+alias  ..='cd ..'		# non-std, see "3.10 Alias Name"
+alias ...='cd ../..'	# non-std, see "3.10 Alias Name"
+alias  me='cd ~/doc/me'
+alias  ca='cd ~/src/calx-dl/tofmt'
 
 ## me
 # shellcheck disable=SC2086
@@ -161,7 +164,7 @@ alias fit='cut -c "-$(tput cols)"'
 alias txtrec='grep -F --text --context'
 
 if [ "${0#-}" = bash ] || [ "${0%/bin/bash}" != "$0" ]; then
-	bind '"\C-o": "lf\C-m"'
+	bind '"\C-o": "lfcd\C-m"'
 	bind '"\C-t": "tat\C-m"'
 fi
 

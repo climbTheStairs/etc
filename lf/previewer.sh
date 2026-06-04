@@ -1,6 +1,7 @@
 #!/bin/sh
 # dep: bat, chafa, tar, unzip
 readonly BS=$(printf \\b)
+alias p='printf %s\\n'
 f=$1 w=$(($2 - 5)) h=$3
 case $f in
 	*.tsv)							tsv.py < "$f" ;;
@@ -14,7 +15,14 @@ case $f in
 	*.tar.xz|*.txz)					tar -tvJf "$f" ;;
 	*.zip)							unzip -l "$f" ;;
 	#*.dv)							dvcode < "$f" ;;
-	*.json)							jq --color-output < "$f" ;;
+	*.json|*.jsonl)					jq --color-output < "$f" ;;
+	*.db|*.sqlite|*.sqlite3)		{ # TODO: SQL injectn
+			p '.mode list'
+			for t in $(sqlite3 -readonly "$f" .tables); do
+				p "SELECT COUNT(*) || char(9) || '$t' FROM $t;"
+			done
+			p '.schema'
+		} | sqlite3 -readonly "$f" ;;
 	*.[123456789]|*.[123456789p])	man -O "width=$w" "$f" | sed "s/.$BS"'\(.\)/\1/g' ;;
 	*.c|*.cpp|*.css|*.go|*.h|*.java|*.js|*.lua|*.html|*.py|*.sh|[Mm]akefile) # TODO: `*Makefile`?
 									highlight -O ansi "$f" ;;

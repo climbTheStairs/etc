@@ -4,3 +4,4 @@ disable=SC2016 # im not retarded
 disable=SC2046,2086 # https://github.com/koalaman/shellcheck/issues/2816
 disable=SC2155 # TODO: file issue to enable only when eg `set -e`
 disable=SC2164 # TODO: file issue to disable when `cd` is last cmd
+disable=SC3040 # should be fixed in new ver, see https://github.com/koalaman/shellcheck/issues/2555 https://github.com/koalaman/shellcheck/pull/3305
