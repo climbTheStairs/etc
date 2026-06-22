@@ -149,4 +149,5 @@ com -range Sum <line1>,<line2>w !sh -c ". ~/etc/sh/alias; sum"
 
 ru arch.vim
 ru vivo.vim
+ru arlux.vim
 ru _my_fold.vim

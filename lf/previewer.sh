@@ -8,7 +8,7 @@ case $f in
 	*.jpg|*.png|*.svg|*.webp)		chafa --size "${w}x${h}" "$f" ;;
 	*.mp[34]|*.m4[av]|*.mkv|*.webm)	mediainfo "$f" ;;
 	*.pdf)							pdftotext "$f" - ;;
-	*.docx)							pandoc "$f" --to markdown --columns "$w" ;;
+	*.docx|*.pptx|*.xlsx)			pandoc "$f" --to markdown --columns "$w" ;;
 	*.tar)							tar -tvf "$f" ;;
 # TODO: mor gen xz, o0 compressn
 	*.tar.gz|*.tgz)					tar -tvzf "$f" ;;

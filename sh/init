@@ -1,6 +1,7 @@
 #!/bin/sh
 #echo "run from ${BASH_SOURCE[0]}"
 set -o noclobber
+export LC_ALL=C.UTF-8 # sort by ASCII
 export PATH=~/bin:$PATH
 export PATH=~/bin/spec:$PATH # TODO: hopefully tmp, try think o sth better
 export XDG_CACHE_HOME=~/cache

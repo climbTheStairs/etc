@@ -10,3 +10,5 @@ TapDragLock=true
 
 [Libinput][6127][24919][Lenovo Howard 2022 2.4G Mouse]
 NaturalScroll=false
+PointerAcceleration=-0.400
+PointerAccelerationProfile=2

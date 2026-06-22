@@ -19,7 +19,7 @@ alias ffmpeg='ffmpeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
 alias gcc='gcc -Wall -Wextra -Wpedantic -g'
 alias grep='grep --color'
-alias jq='jq --tab'
+alias jq='jq --tab -L ~'
 alias ls='LC_ALL=C ls -k --color --group-directories-first'
 alias magick='magick -define pdf:create-epoch=1 -define pdf:modify-epoch=1 -define pdf:title=' # reproducible
 alias mitmproxy='mitmproxy --set confdir="${XDG_CONFIG_HOME:-~/etc}/mitmproxy"'
@@ -47,6 +47,7 @@ alias curlff='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
 alias dce=discord-chat-exporter-cli
 alias dcec='dce export		--fuck-russia --utc --media --reuse-media -c'
 alias dceg='dce exportguild	--fuck-russia --utc --media --reuse-media -g'
+alias fec='fastfetch -l "$(shufn1 "${XDG_DATA_HOME:-~/sha}/stairs/int_logos.txt")"'
 alias g=git
 alias gdl=gallery-dl
 alias gdl.='gallery-dl -D .'	# non-std, see "3.10 Alias Name"
@@ -61,6 +62,8 @@ alias tts='piper-tts --model /usr/share/piper-voices/en/en_US/ryan/high/en_US-ry
 alias v='"${EDITOR:-vi}"'
 alias v=vim
 alias ydl=yt-dlp
+alias yy=wl-copy
+alias zbi='zbarimg --raw --quiet'
 ta() { tmux attach-session ${1+-t $1}; }
 alias tat='ta || t'
 
@@ -107,6 +110,9 @@ alias p='printf %s\\n'
 # this is fn so that `sh -c '. ~/etc/sh/alias; cmd...'` works
 sum() { sed 's/^/(/; s/$/)/' | paste -sd + | bc; }
 # abandoned: alias sum="awk '{t += \$n} END {print t}'"
+ncomm() { comm "$@" | awk 'BEGIN {FS=OFS="\t"} $1 {a++} $2 {b++} $3 {c++} END {print a, b, c}'; }
+tr_d() { tr -d "$@"; echo; }
+alias tr-d='tr_d' # alias names are more permissiv than fn names
 alias uniq-c="{ uniq -c | sed 's/^ *//; s/ /$HT/'; }"
 alias cnt='{ sort | uniq-c | sort -rn; }'
 alias fname='sed "s,.*/,,"'
@@ -151,7 +157,8 @@ voldetect() {
 grepr() {
 	dir=$1; shift
 	# `'grep'` quoted to prevent SC2033
-	find "$dir" -type d -name .git \! -prune -o \
+	find "$dir" \
+		-type d \( -name .git -o -name .venv -o -name venv -o -name node_modules \) \! -prune -o \
 		-type f -exec 'grep' --color "$@" {} + # --color is non-std
 }
 
