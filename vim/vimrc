@@ -137,6 +137,7 @@ let @d=':r !iso8601kgJ'
 let @r='8ldf.fr2df/4wcf/comment/f/xf#dE' " fmt @red comment url
 let @f='dEA	p03xA	j' " fmt @1t export
 let @s='f.a'
+let @2=':%s/\v<([01]?[0-9]):([0-5][0-9]) ([AP])M>/\=printf("%02d:%02d", (submatch(1) + 12 * ((submatch(3)=="P") != (submatch(1)==12))) % 24, submatch(2))/g'
 
 " run files with F5
 " TODO: mk master compile, exec, open scr out o Vim

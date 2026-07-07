@@ -11,7 +11,7 @@ fu! FE(lnum)
 endf
 
 fu! FoldIndentInclPar(lnum)
-	let lvcurr = indent(a:lnum) / shiftwidth() " + 2
+	let lvcurr = indent(a:lnum)   / shiftwidth() " + 2
 	let lvnext = indent(a:lnum+1) / shiftwidth() " + 2
 	if lvnext > lvcurr
 		return '>' . lvnext
@@ -31,7 +31,7 @@ fu! FoldText()
 	let content = substitute(ln, '^\s*- ', '', '')
 	let n = v:foldend - v:foldstart
 	let ln = marker . content
-	return ln . repeat(' ', max([80 - strlen(ln . n), 2])) . n
+	return ln . repeat(' ', max([80 - strdisplaywidth(ln . n), 2])) . n
 endf
 
 fu! MyFold()
