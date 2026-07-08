@@ -5,11 +5,14 @@
 	df	= diff --minimal
 	dfs	= diff --summary
 	dfw	= diff --word-diff=color
-	dfww	= diff --word-diff=plain
+	dfw2	= diff --word-diff=plain
+	dfww	= dfw  --word-diff-regex="[0-9A-Za-z_]+|."
+	dfww2	= dfw2 --word-diff-regex="[0-9A-Za-z_]+|."
 	log1	= log --oneline		# show commit msg
 	log2	= log1 --name-only	# show commit msg, files
 	log3	= log1 --stat		# show commit msg, files, summary o changes
 	st	= status --short
+	stt	= st --untracked-files=no
 [commit]
 	gpgsign = true
 [core]

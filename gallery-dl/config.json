@@ -2,8 +2,10 @@
 	"_COMMENT": "Only ever modify master copy on arch:!",
 	"extractor": {
 		"filename": "{category[:3]}_{post_shortcode|tweet_id|id|index|post_id}_{num|'0':>02}.{extension}",
-		"pixiv": {
-			"_COMMENT": "see <https://github.com/mikf/gallery-dl/issues/6448>"
+		"twitter": {
+			"logout": true,
+			"quoted": true,
+			"text-tweets": true
 		},
 		"reddit": {
 			"user-agent": "Python:gallery-dl:v1.0 (by /u/climbthestairs)"

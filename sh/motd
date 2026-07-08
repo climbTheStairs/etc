@@ -11,9 +11,9 @@ phead() {
 #lolcat "$XDG_CONFIG_HOME/sh/notices.txt"
 #echo
 
-#phead 'SCHED'
-#cat ~/doc/me/sched2.txt | tail -n +2 | lolcat
-#echo
+phead 'SCHED'
+cat ~/doc/me/sched2.txt | tail -n +2 | lolcat
+echo
 
 #phead 'TODO'
 #neldoreth | lolcat

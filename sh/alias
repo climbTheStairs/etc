@@ -62,7 +62,8 @@ alias tts='piper-tts --model /usr/share/piper-voices/en/en_US/ryan/high/en_US-ry
 alias v='"${EDITOR:-vi}"'
 alias v=vim
 alias ydl=yt-dlp
-alias yy=wl-copy
+alias y3='yt-dlp -t mp3'
+alias yy='wl-copy --type text/plain'
 alias zbi='zbarimg --raw --quiet'
 ta() { tmux attach-session ${1+-t $1}; }
 alias tat='ta || t'
@@ -110,7 +111,7 @@ alias p='printf %s\\n'
 # this is fn so that `sh -c '. ~/etc/sh/alias; cmd...'` works
 sum() { sed 's/^/(/; s/$/)/' | paste -sd + | bc; }
 # abandoned: alias sum="awk '{t += \$n} END {print t}'"
-ncomm() { comm "$@" | awk 'BEGIN {FS=OFS="\t"} $1 {a++} $2 {b++} $3 {c++} END {print a, b, c}'; }
+ncomm() { comm "$@" | awk 'BEGIN {FS=OFS="\t"; a=b=c=0} $1 {a++} $2 {b++} $3 {c++} END {print a, b, c}'; }
 tr_d() { tr -d "$@"; echo; }
 alias tr-d='tr_d' # alias names are more permissiv than fn names
 alias uniq-c="{ uniq -c | sed 's/^ *//; s/ /$HT/'; }"
@@ -121,6 +122,18 @@ alias ext='{ fname | sed "/[^.][.]/!s/.*//; s/.*[.]//"; }'
 # dep: column, less
 alias tsv="{ column -ts '$HT' | less --chop-long-lines; }"
 #_alias fig='git --git-dir="${XDG_DATA_HOME:-~/sha}/fig" --work-tree="$HOME"'
+shufn1() {
+	[ $# = 1 ] && [ "$1" != - ] || exit 1
+	n=$(awk -v n="$(wc -l < "$1")" 'BEGIN {srand(); print int(rand()*n + 1)}')
+	sed -n "${n}{p;q}" < "$1"
+}
+tar_xz_rm() {
+	for f do
+		f=${f%/}
+		[ -n "$f" ] || [ "$f" != . ] && [ "$f" != .. ] || continue
+		tar -cJf "$f.tar.xz" -- "$f" && rm -rf -- "$f"
+	done
+}
 
 mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 
