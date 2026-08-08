@@ -16,10 +16,12 @@ nn J gt
 nn K gT
 nn <C-j> J
 vn <C-j> J
-
-"" spell
 nn <F6> :se wrap!<Enter>
 nn <F7> :se spell!<Enter>
+nn <Insert> "+p
+vn <Insert> "+p
+
+"" spell
 " TODO: (non-trivial) prevent ColorColumn annoyingly overriding bg
 hi SpellBad	ctermbg=1 ctermfg=11 cterm=undercurl
 

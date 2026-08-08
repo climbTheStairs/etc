@@ -1,7 +1,7 @@
 #!/bin/sh
 # Only ever modify master copy on arch:!
 # shellcheck disable=SC2139 # "expands when defined, not when used"
-readonly HT=$(printf \\t) 2> /dev/null
+readonly HT=$(printf \\t) CR=$(printf \\r) 2> /dev/null
 
 ## POSIX default opts
 alias cp='cp -i'
@@ -39,21 +39,25 @@ alias mk=make
 alias mkd=mkdir
 alias pandocc='pandoc -V geometry:margin=1in -V linkcolor=blue'
 alias rmd=rmdir
+alias sortk="sort -t '$HT' -k"
 alias tabawk="awk -F '$HT'"
 
 ## short commands
 alias '+x=chmod +x'				# non-std, see "3.10 Alias Name"
 alias curlff='curl -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0"'
-alias dce=discord-chat-exporter-cli
-alias dcec='dce export		--fuck-russia --utc --media --reuse-media -c'
-alias dceg='dce exportguild	--fuck-russia --utc --media --reuse-media -g'
+alias dce='FUCK_RUSSIA=1 discord-chat-exporter-cli'
+alias dcec='dce export		--utc --media --reuse-media --media-dir media --markdown false --include-threads all -f json -c'
+alias dceg='dce exportguild	--utc --media --reuse-media --media-dir media --markdown false --include-threads all -f json -g'
 alias fec='fastfetch -l "$(shufn1 "${XDG_DATA_HOME:-~/sha}/stairs/int_logos.txt")"'
+alias ff=firefox
 alias g=git
-alias gdl=gallery-dl
 alias gdl.='gallery-dl -D .'	# non-std, see "3.10 Alias Name"
+alias gdl=gallery-dl
+alias jctl=journalctl
 alias ll='ls -lh'
-alias po='pass otp'
+alias mpvpl='mpv --shuffle --loop-playlist'
 alias pfreeze='pip list --not-required --format=freeze'
+alias po='pass otp'
 alias py=python3
 alias scim=sc-im
 alias shck=shellcheck
@@ -61,8 +65,9 @@ alias t=tmux
 alias tts='piper-tts --model /usr/share/piper-voices/en/en_US/ryan/high/en_US-ryan-high.onnx'
 alias v='"${EDITOR:-vi}"'
 alias v=vim
-alias ydl=yt-dlp
 alias y3='yt-dlp -t mp3'
+alias ydl=yt-dlp
+alias yx='yt-dlp -x'
 alias yy='wl-copy --type text/plain'
 alias zbi='zbarimg --raw --quiet'
 ta() { tmux attach-session ${1+-t $1}; }
@@ -71,7 +76,7 @@ alias tat='ta || t'
 ## flgs as cmd
 readonly opts_systemctl='enable disable start stop restart status daemon-reload'
 readonly opts_pacman_root='Rns S Syu Syyu'
-readonly opts_pacman_user='Qi Qs Qqs Ql Qql Si Ss Ssq Sg Sgq'
+readonly opts_pacman_user='Qi Qqs Ql Qql Si Ssq Sg Sgq'
 readonly opts_pacman_q='Q Qd Qdn Qdm Qdtn Qe Qen Qem Qm Qn Qi Qo'
 for opt in $opts_systemctl;		do alias "$opt=doas systemctl $opt"	; done
 for opt in $opts_pacman_root;	do alias "$opt=doas pacman -$opt"	; done
@@ -79,6 +84,8 @@ for opt in $opts_pacman_user;	do alias "$opt=pacman -$opt"		; done
 for opt in $opts_pacman_q;		do alias "$opt=pacman -q$opt"		; done
 Qlf()	{  Ql "$@" | grep -Ev '/$'; }
 Qqlf()	{ Qql "$@" | grep -Ev '/$'; }
+Qs()	{ pacman -Qs "$@" | ltrim | paste - -; }
+Ss()	{ pacman -Ss "$@" | ltrim | paste - -; }
 
 ## cd
 # GNU Bash reads 'alias -=...' as opt
@@ -105,16 +112,20 @@ alias lf=lfcd
 ## complex alias & fn
 
 # clear screen, mv cursor (1, 1), clear scrollback
+alias trim='rtrim | ltrim'
+#alias ltrim="sed -E 's/^[ $HT$CR]+//'"
+ltrim() { sed -E "s/^[ $HT$CR]+//" "$@"; }
+alias rtrim="sed -E 's/[ $HT$CR]+\$//'"
 alias c='printf \\x1B[2J\\x1B[H\\x1B[3J'
 alias p='printf %s\\n'
 # this override GNU coreutils /bin/sum
 # this is fn so that `sh -c '. ~/etc/sh/alias; cmd...'` works
 sum() { sed 's/^/(/; s/$/)/' | paste -sd + | bc; }
 # abandoned: alias sum="awk '{t += \$n} END {print t}'"
-ncomm() { comm "$@" | awk 'BEGIN {FS=OFS="\t"; a=b=c=0} $1 {a++} $2 {b++} $3 {c++} END {print a, b, c}'; }
+ncomm() { comm "$@" | awk 'BEGIN {FS=OFS="\t"; a=b=c=0} $1 {a++; next} $2 {b++; next} $3 {c++} END {print a, b, c}'; }
 tr_d() { tr -d "$@"; echo; }
 alias tr-d='tr_d' # alias names are more permissiv than fn names
-alias uniq-c="{ uniq -c | sed 's/^ *//; s/ /$HT/'; }"
+alias uniq-c="{ uniq -c | ltrim | sed 's/ /$HT/'; }"
 alias cnt='{ sort | uniq-c | sort -rn; }'
 alias fname='sed "s,.*/,,"'
 alias dname='sed "s,[^/]*\$,,"'
@@ -122,6 +133,10 @@ alias ext='{ fname | sed "/[^.][.]/!s/.*//; s/.*[.]//"; }'
 # dep: column, less
 alias tsv="{ column -ts '$HT' | less --chop-long-lines; }"
 #_alias fig='git --git-dir="${XDG_DATA_HOME:-~/sha}/fig" --work-tree="$HOME"'
+desc_get() {
+	key=$1; shift
+	awk -F "$HT" -v k="$key" '$1 == k {print $2}' "$@"
+}
 shufn1() {
 	[ $# = 1 ] && [ "$1" != - ] || exit 1
 	n=$(awk -v n="$(wc -l < "$1")" 'BEGIN {srand(); print int(rand()*n + 1)}')

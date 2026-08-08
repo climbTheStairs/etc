@@ -31,8 +31,8 @@ export HISTFILE=$XDG_DATA_HOME/bash/historia_aeterna
 export HISTFILESIZE=
 # TODO: how excl from only disk but not mem?
 # eq to also setting HISTCONTROL=ignoreboth
-export HISTIGNORE='&:[ ]*:pwd:cd:-:..:...:ca:me:fg:exit:l[als]:lla:v:c:'\
-'bash:clear:g st:g remote -v:lf:t:ta:tat:t ls:'
+export HISTIGNORE='&:[ ]*:?:??:???:????:man *:'\
+'clear:g ??:g log1:g remote -v:t ls:lsblk:lsblk -f:pme *.'
 export HISTSIZE=
 # `history` output
 export HISTTIMEFORMAT='[%Y-%m-%d %H:%M:%S] '
