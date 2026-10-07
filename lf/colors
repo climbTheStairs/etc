@@ -1,0 +1,157 @@
+# vim:ft=dircolors
+# (This is not a dircolors file but it helps to highlight colors and comments)
+# see: <https://github.com/gokcehan/lf/blob/master/etc/colors.example>
+# see: <https://github.com/RobertAudi/.dotfiles/blob/master/docs/cheat-sheets/ls-colors-cheat-sheet.txt>
+# truecolor fg	38;2;255;255;255
+# truecolor bg	48;2;255;255;255
+# TODO: *.gz *.xz *.zst
+
+## default
+ln	46	# symlink
+or	01;41;93	# symlink broken
+ex	102;30	# executable
+
+## rare file ty
+pi	01;45	# fifo
+so	01;45	# socket
+#bd	01;33	# BLK
+#cd	01;33	# CHR
+su	01;42	# SETUID
+sg	01;42	# SETGID
+
+## archive
+*.7z    44;37
+*.deb   44;37
+*.rar   44;37
+*.rpm   44;37
+*.tar	44;37
+*.tar.gz	44;37
+*.tar.xz	44;37
+*.tar.zst	44;37
+*.tgz	44;37
+*.txz	44;37
+*.tzst	44;37
+*.zip	44;37
+
+## hidden
+*.calx	90
+*.calx	38;2;64;64;64
+
+## text
+*.md	36
+*.rst	36
+*.tex	36
+*.tsv	36
+*.txt	36
+
+## human-readable docs
+*.d2	33
+*.html	33
+*.pdf	33
+*.ps	33
+
+## bloated doc fmts
+# TODO: how prevent Konsole turn bold orange text (01;33) yellow?
+*.docx	30;43
+*.epub	30;43
+*.ipynb	30;43
+*.mscz	30;43
+*.odp	30;43
+*.odt	30;43
+*.pptx	30;43
+*.xlsx	30;43
+
+## img
+*.avif	35
+*.gif	35
+*.heic	35
+*.ico	35
+*.jpg	35
+*.png	35
+*.svg	35
+*.webp	35
+
+## vid
+*.mkv	95
+*.mov	95
+*.mp4	95
+*.webm	95
+
+## subtitles
+*.srt	95
+*.vtt	95
+
+## aud
+*.aac	31
+*.flac	31
+*.m4a	31
+*.mka	31
+*.mp3	31
+*.oga	31
+*.ogg	31
+*.opus	31
+*.wav	31
+
+## prog
+Makefile	32
+go.mod	32
+*.awk	32
+*.bash	32
+*.bat	32
+*.c	32
+*.cls	32
+*.cpp	32
+*.css	32
+*.go	32
+*.h	32
+*.hs	32
+*.java	32
+*.jq	32
+*.js	32
+*.lua	32
+*.mk	32
+*.patch	32
+*.php	32
+*.pl	32
+*.py	32
+*.rs	32
+*.sed	32
+*.sh	32
+*.sql	32
+*.ts	32
+*.vim	32
+
+## text dat
+*.conf	37
+*.csv	37
+*.ini	37
+*.json	37
+*.jsonl	37
+*.log	37
+*.toml	37
+*.xml	37
+*.yaml	37
+*.yml	37	# prefer .yaml for own proj
+
+## db
+*.db	100
+*.db-journal	100
+*.db-shm	100
+*.db-wal	100
+*.sqlite	100
+*.sqlite-journal	100
+*.sqlite-shm	100
+*.sqlite-wal	100
+
+## not colored
+# dot: .gitkeep .gitignore .nomedia
+# font: ttf otf
+# exe: exe dll jar
+
+## forbidn
+# jpeg (inso jpg)
+# ndjson (inso jsonl)
+# bak (inso `bak.*` `*.BAK_JIC.*`)
+# description (inso desc.txt)?
+# desc (inso calx)
+

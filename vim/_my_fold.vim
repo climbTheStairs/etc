@@ -21,17 +21,17 @@ fu! FoldIndentInclPar(lnum)
 	return '='
 endf
 
-fu! ET(s)
+fu! ExpandTab(s)
 	return substitute(a:s, '\t', repeat(' ', &tabstop), 'g')
 endf
 
 fu! FoldText()
 	let ln = getline(v:foldstart)
 	let match_marker = '\v^\s*(- |[0-9]+[.] ?)' "TODO: this is curr imperf
-	let marker = ET(matchstr(ln, match_marker))
+	let marker = ExpandTab(matchstr(ln, match_marker))
 	let content = substitute(ln, match_marker, '', '')
-	let n = v:foldend - v:foldstart
 	let ln = marker . content
+	let n = v:foldend - v:foldstart
 	return ln . repeat(' ', max([80 - strdisplaywidth(ln . n), 2])) . n
 endf
 

@@ -32,10 +32,11 @@ export HISTFILESIZE=
 # TODO: how excl from only disk but not mem?
 # eq to also setting HISTCONTROL=ignoreboth
 export HISTIGNORE='&:[ ]*:?:??:???:????:man *:'\
-'clear:g ??:g log1:g remote -v:t ls:lsblk:lsblk -f:pme *.'
+'clear:g ??:g log1:g remote -v:t ls:lsblk:lsblk -f:pme *.:. ~/etc/sh/alias'
 export HISTSIZE=
 # `history` output
 export HISTTIMEFORMAT='[%Y-%m-%d %H:%M:%S] '
+export TMSU_DB=~/tp/tmsu.sqlite
 
 ## XDG base dir
 export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc

@@ -128,7 +128,7 @@ au FileType python	setl ts=4 et
 au FileType sh		setl ts=4
 au FileType tex		setl ts=4 cole=2
 au FileType tsv		setl ts=50 nowrap
-au FileType yaml	setl ts=2
+au FileType yaml	setl ts=2 et
 let g:markdown_recommended_style = 0 " fuck off neovim <https://redd.it/yiofkx>
 
 " Settings for diff file names
