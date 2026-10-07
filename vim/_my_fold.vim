@@ -27,8 +27,9 @@ endf
 
 fu! FoldText()
 	let ln = getline(v:foldstart)
-	let marker = ET(matchstr(ln, '^\s*- '))
-	let content = substitute(ln, '^\s*- ', '', '')
+	let match_marker = '\v^\s*(- |[0-9]+[.] ?)' "TODO: this is curr imperf
+	let marker = ET(matchstr(ln, match_marker))
+	let content = substitute(ln, match_marker, '', '')
 	let n = v:foldend - v:foldstart
 	let ln = marker . content
 	return ln . repeat(' ', max([80 - strdisplaywidth(ln . n), 2])) . n
