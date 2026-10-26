@@ -9,7 +9,7 @@
 ## default
 ln	46	# symlink
 or	01;41;93	# symlink broken
-ex	102;30	# executable
+ex	01;92	# executable
 
 ## rare file ty
 pi	01;45	# fifo
@@ -77,20 +77,20 @@ sg	01;42	# SETGID
 *.mp4	95
 *.webm	95
 
-## subtitles
+## sub
 *.srt	95
 *.vtt	95
 
 ## aud
-*.aac	31
-*.flac	31
-*.m4a	31
-*.mka	31
-*.mp3	31
-*.oga	31
-*.ogg	31
-*.opus	31
-*.wav	31
+*.aac	91
+*.flac	91
+*.m4a	91
+*.mka	91
+*.mp3	91
+*.oga	91
+*.ogg	91
+*.opus	91
+*.wav	91
 
 ## prog
 Makefile	32

@@ -5,9 +5,9 @@
 	df	= diff --minimal
 	dfs	= diff --summary
 	dfw	= diff --word-diff=color
-	dfw2	= diff --word-diff=plain
-	dfww	= dfw  --word-diff-regex="[0-9A-Za-z_]+|."
-	dfww2	= dfw2 --word-diff-regex="[0-9A-Za-z_]+|."
+	dfv	= diff --word-diff=plain
+	dfww	= dfw --word-diff-regex="[0-9A-Za-z_]+|."
+	dfvv	= dfv --word-diff-regex="[0-9A-Za-z_]+|."
 	log1	= log --oneline		# show commit msg
 	log2	= log1 --name-only	# show commit msg, files
 	log3	= log1 --stat		# show commit msg, files, summary o changes
