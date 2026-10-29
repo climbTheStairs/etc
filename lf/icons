@@ -1,0 +1,142 @@
+di	📂
+ln	✈️
+or	💔
+ex	⚡
+
+## archive
+*.7z	🤐
+*.deb	🍥
+*.rar	📦
+*.rpm	🎩
+*.tar	📦
+*.tar.gz	📦
+*.tar.xz	📦
+*.tar.zst	📦
+*.tgz	📦
+*.txz	📦
+*.tzst	📦
+*.zip	🤐
+
+*.calx	❄️
+
+*.md	📜
+*.rst	📜
+*.tex	😵‍💫
+*.txt	📝
+*.tsv	🪑
+
+## human-readable docs
+*.d2	💎
+*.html	🌐
+*.pdf	📚
+*.ps	📮
+
+## bloated doc fmts
+*.docx	📘
+*.epub	📚
+*.ipynb	🪐
+*.mscz	🎹
+*.odp	🛝
+*.ods	🧮
+*.odt	📘
+*.pptx	🛝
+*.xlsx	🧮
+
+## img
+*.avif	📷
+*.gif	🦒
+*.heic	📷
+*.ico	🍎
+*.jpg	🖼️
+*.png	🖼️
+*.svg	🎨
+*.webp	🖼️
+
+## vid
+*.mkv	📽️
+*.mov	📽️
+*.mp4	📽️
+*.webm	📽️
+
+## sub
+*.srt	💬
+*.vtt	💬
+
+## aud
+*.aac	🔊
+*.flac	🪉
+*.m4a	🔊
+*.mka	🔊
+*.mp3	🔊
+*.oga	🔊
+*.ogg	🔊
+*.opus	🔊
+*.wav	🌊
+
+## prog
+*.awk	🦜
+*.bash	🔨
+*.bat	🦇
+*.c	🇨
+*.cls	😵‍💫
+*.cpp	🤮
+*.css	🌈
+*.go	🐬
+*.h	🇭
+*.hs	🇬🇷
+*.java	☕
+*.jq	🧪
+*.js	🦕
+*.lua	🔭
+*.mk	🏗️
+*.patch	🩹
+*.php	🐘
+*.pl	🐪
+*.py	🐍
+*.rs	🦀
+*.sed	🗣️
+*.sh	🐚
+*.sql	🐿️
+*.ts	🦕
+*.vim	🔧
+Makefile	🏗️
+go.mod	🐳
+
+## text dat
+*.conf	⚙️
+*.csv	🪑
+*.ini	⚙️
+*.json	☀️
+*.jsonl	☀️
+*.log	🪵
+*.toml	⚙️
+*.xml	🤖
+*.yaml	🍠
+*.yml	🍠
+
+## db
+*.db	💾
+*.db-journal	💾
+*.db-shm	💾
+*.db-wal	💾
+*.sqlite	💾
+*.sqlite-journal	💾
+*.sqlite-shm	💾
+*.sqlite-wal	💾
+
+## font
+*.ttf	🔡
+*.otf	🔡
+
+## z
+*.eml	📩
+*.mbox	📬
+*.gpg	🔒
+*.pem	🔑
+*.cer	🔑
+*.p12	🔑
+*.pub	👤
+*.ics	📅
+
+## unused emojis: 👑🏹🧩🧸☂️ 🫙💣
+

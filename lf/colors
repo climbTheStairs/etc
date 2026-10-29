@@ -5,6 +5,7 @@
 # truecolor fg	38;2;255;255;255
 # truecolor bg	48;2;255;255;255
 # TODO: *.gz *.xz *.zst
+# TODO: see ot ext in icons
 
 ## default
 ln	46	# symlink
@@ -20,10 +21,10 @@ su	01;42	# SETUID
 sg	01;42	# SETGID
 
 ## archive
-*.7z    44;37
-*.deb   44;37
-*.rar   44;37
-*.rpm   44;37
+*.7z	44;37
+*.deb	44;37
+*.rar	44;37
+*.rpm	44;37
 *.tar	44;37
 *.tar.gz	44;37
 *.tar.xz	44;37
@@ -57,6 +58,7 @@ sg	01;42	# SETGID
 *.ipynb	30;43
 *.mscz	30;43
 *.odp	30;43
+*.ods	30;43
 *.odt	30;43
 *.pptx	30;43
 *.xlsx	30;43
