@@ -80,6 +80,7 @@ sg	01;42	# SETGID
 *.webm	95
 
 ## sub
+*.ass	95
 *.srt	95
 *.vtt	95
 

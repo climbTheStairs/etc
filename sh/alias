@@ -61,11 +61,11 @@ alias mpvpl='mpv --shuffle --loop-playlist'
 alias pfreeze='pip list --not-required --format=freeze'
 alias po='pass otp'
 alias py=python3
+alias rec='ffmpeg -f pulse -i default'
 alias scim=sc-im
 alias shck=shellcheck
 alias t=tmux
 alias t2s='opencc -c t2s'
-alias tts='piper-tts --model /usr/share/piper-voices/en/en_US/ryan/high/en_US-ryan-high.onnx'
 alias v='"${EDITOR:-vi}"'
 alias v=vim
 alias y3='yt-dlp -t mp3'
@@ -140,17 +140,17 @@ alias valias='"$EDITOR" "${XDG_CONFIG_HOME:-~/etc}/sh/alias" && . "${XDG_CONFIG_
 #_alias fig='git --git-dir="${XDG_DATA_HOME:-~/sha}/fig" --work-tree="$HOME"'
 findtxt() {
 	d=$1; shift
-	find "$1" \( -name \*.txt -o -name \*.md -o -name \*.tsv \) "$@"
+	find "$d" \( -name \*.txt -o -name \*.md -o -name \*.tsv \) "$@"
 }
 desc_get() {
 	key=$1; shift
 	awk -F "$HT" -v k="$key" '$1 == k {print $2}' "$@"
 }
-shufn1() {
+shufn1() (
 	[ $# = 1 ] && [ "$1" != - ] || exit 1
 	n=$(awk -v n="$(wc -l < "$1")" 'BEGIN {srand(); print int(rand()*n + 1)}')
 	sed -n "${n}{p;q}" < "$1"
-}
+)
 tar_xz_rm() {
 	for f do
 		f=${f%/}
@@ -159,9 +159,13 @@ tar_xz_rm() {
 	done
 }
 
+sort_len() {
+	awk -F"$HT" -vOFS="$HT" '{print length, $0}' | sort -n "$@" | cut -f2
+}
+
 mkcd() { mkdir -p -- "$1" && cd -- "$1"; }
 
-diff_filt() {
+diff_filt() (
 	# dep: bash `<()`
 	[ $# -gt 2 ] || exit 1
 	# --color is non-std
@@ -169,7 +173,7 @@ diff_filt() {
 		<(cat -- "$1" | eval "${3:-cat}") \
 		<(cat -- "$2" | eval "${3:-cat}")
 	' _ "$@"
-}
+)
 
 inplace() (
 	: #no_x() (
@@ -189,9 +193,26 @@ inplace() (
 alias  nocr_vim='vim --clean -c "bufdo se ff=unix|wqa"'
 alias nobom_vim='vim --clean -c "bufdo se  nobomb|wqa"'
 
-voldetect() {
+aud_cat() (
+	cmd='ffmpeg -hide_banner'
+	n=$(($#-1))
+	i=0; for arg do
+		[ $i -lt $n ] || break
+		cmd="$cmd -i $arg" filt="$filt[$i:a]"
+		i=$((i+1))
+	done
+	filt="${filt}concat=n=$n:v=0:a=1[outa]"
+	$cmd -filter_complex "$filt" -map '[outa]' "$arg"
+)
+
+vol_detect() {
 	ffmpeg -i "$1" -af volumedetect -f null /dev/null 2>&1 | grep -F _volume:
 }
+
+silence_detect() (
+	f=$1 min_dur=${2:-'3'} threshold=${3:-'-30dB'}
+	ffmpeg -i "$f" -af silencedetect="noise=${threshold}dB:d=$min_dur" -f null -
+)
 
 grepr() {
 	dir=$1; shift
@@ -204,13 +225,17 @@ grepr() {
 # dep: tput cols
 alias fit='cut -c "-$(tput cols)"'
 
-# usage: doas txtrec NUM DRIVE > OUTPUT
+# usage: doas txt_recover NUM DRIVE > OUTPUT
 # src: https://wiki.archlinux.org/title/file_recovery#Text_file_recovery
 # dep: grep --text --context
-alias txtrec='grep -F --text --context'
+alias txt_recover='grep -F --text --context'
 
 if [ "${0#-}" = bash ] || [ "${0%/bin/bash}" != "$0" ]; then
 	bind '"\C-o": "lfcd\C-m"'
 	bind '"\C-t": "tat\C-m"'
 fi
+
+# whisper
+alias stt='whisper-cli --model /usr/share/whisper.cpp-model-large-v3-turbo-q5_0/ggml-large-v3-turbo-q5_0.bin'
+alias sttt='whisper-cli --model /usr/share/whisper.cpp-model-tiny.en/ggml-tiny.en.bin'
 

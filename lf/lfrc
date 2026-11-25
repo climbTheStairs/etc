@@ -14,6 +14,7 @@ set smartcase
 set smartdia
 set sortby name
 set sortignorecase false
+set sortignoredia false
 map X :delete
 map zb :set drawbox!
 map zd :set dirfirst!
@@ -24,7 +25,7 @@ map <esc> :clear; unselect
 set hiddenfiles .*:*.calx
 
 ## unix only
-set drawbox
+set drawbox false
 set previewer ~/etc/lf/previewer.sh
 &lf -remote "send $id :set previewer $XDG_CONFIG_HOME/lf/previewer.sh"
 map q :lfcd_abort
